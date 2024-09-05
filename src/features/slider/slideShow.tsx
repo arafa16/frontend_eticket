@@ -1,9 +1,9 @@
-import TinySlider from "../base-components/TinySlider";
+import TinySlider from "../../base-components/TinySlider";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GetSlider, resetSlider } from "../stores/features/sliderSlice";
+import { GetSlider, resetSlider } from "../../stores/features/sliderSlice";
 import { useEffect, useState } from "react";
-import LoadingIcon from "../base-components/LoadingIcon";
+import LoadingIcon from "../../base-components/LoadingIcon";
 
 export const SlideShow = () => {
     const [datas, setDatas] = useState<any>([]);

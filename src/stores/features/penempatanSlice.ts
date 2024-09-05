@@ -31,6 +31,20 @@ export const getSelectPenempatan: any = createAsyncThunk("penempatan/getSelectPe
     }
 });
 
+export const getPenempatanTable: any = createAsyncThunk("penempatan/getPenempatanTable", async(datas, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/penempatan/data?${datas}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+});
+
 export const penempatanSlice = createSlice({
     name: "penempatan",
     initialState,
@@ -38,7 +52,7 @@ export const penempatanSlice = createSlice({
         resetPenempatan: (state) => initialState
     },
     extraReducers:(builder) => {
-        //login
+        //select
         builder.addCase(getSelectPenempatan.pending, (state) => {
             state.isLoading = true;
         });
@@ -48,6 +62,21 @@ export const penempatanSlice = createSlice({
             state.data = action.payload;
         });
         builder.addCase(getSelectPenempatan.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
+
+        //datas
+        builder.addCase(getPenempatanTable.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(getPenempatanTable.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.data = action.payload;
+        });
+        builder.addCase(getPenempatanTable.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

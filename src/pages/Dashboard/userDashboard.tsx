@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { SlideShow } from "../../features/slider";
+import { SlideShow } from "../../features/slider/slideShow";
 import { dataTicketUser } from "../../features/ticket/ticketUser";
 import { getMeAuth } from "../../features/meAuth";
 import { useEffect, useState } from "react";

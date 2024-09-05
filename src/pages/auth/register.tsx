@@ -4,8 +4,8 @@ import Button from "../../base-components/Button";
 import { FormInput , FormSelect } from "../../base-components/Form";
 
 import { useNavigate } from "react-router-dom";
-import { getDevisiSelect } from "../../features/devisiSelect";
-import { getPenempatanSelect } from "../../features/penempatanSelect";
+import { getDevisiSelect } from "../../features/devisi/devisiSelect";
+import { getPenempatanSelect } from "../../features/penempatan/penempatan";
 import LoadingIcon from "../../base-components/LoadingIcon";
 import { getRegisterAuth } from "../../features/Auth";
 import { getMessageShow } from "../../features/messageShow";

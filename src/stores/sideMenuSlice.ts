@@ -39,11 +39,26 @@ const initialState: SideMenuState = {
       title: "Data Ticket",
     },
     {
-      icon: "MessageSquare",
-      pathname: "/show",
-      title: "Show",
+      icon: "User",
+      pathname: "/user/data",
+      title: "User",
+    },
+    {
+      icon: "Flower",
+      pathname: "/slider/data",
+      title: "Slider",
     },
     "Asset",
+    {
+      icon: "Bookmark",
+      pathname: "/devisi/data",
+      title: "Devisi",
+    },
+    {
+      icon: "Bookmark",
+      pathname: "/penempatan/data",
+      title: "Penempatan",
+    },
     {
       icon: "Trello",
       pathname: "/profile",

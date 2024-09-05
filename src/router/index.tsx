@@ -5,7 +5,6 @@ import ResetPassword from "../pages/auth/resetPassword";
 import Register from "../pages/auth/register";
 import EmailReset from "../pages/auth/emailReset";
 import UserDashboard from "../pages/Dashboard/userDashboard.js";
-import Show from "../pages/showPage/show.js";
 import ViewTicketPage from "../pages/ticket/viewTicketPage";
 import DataTicketUserPage from "../pages/ticket/dataTicketUserPage";
 import CreateTicketPage from "../pages/ticket/createTicketPage";
@@ -15,6 +14,15 @@ import DataTicketPage from "../pages/ticketAll/dataTicketPage";
 import CreateTicketAdminPage from "../pages/ticketAll/createTicketAdminPage";
 import ViewTicketAdminPage from "../pages/ticketAll/viewTicketAdminPage";
 import UpdateTicketAdminPage from "../pages/ticketAll/updateTicketAdminPage";
+import ViewDataUser from "../pages/user/viewDataUserPage";
+import ViewUserByIdPage from "../pages/user/viewUserByIdPage";
+import EditUserByIdPage from "../pages/user/editUserByIdPage";
+import CreateUserPage from "../pages/user/createUserPage";
+import ViewSliderPage from "../pages/slider/viewSliderPage";
+import CreateSliderPage from "../pages/slider/createSliderPage";
+import ViewSliderByIdPage from "../pages/slider/viewSliderByIdPage";
+import DataDevisiPage from "../pages/devisi/dataDevisiPage";
+import DataPenempatanPage from "../pages/penempatan/dataPenempatanPage";
 
 function Router() {
   const routes = [
@@ -63,8 +71,41 @@ function Router() {
           element: <UpdateTicketAdminPage />,
         },
         {
-          path: "/show",
-          element: <Show />,
+          path: "/user/data/",
+          element: <ViewDataUser />,
+        },
+        {
+          path: "/user/data/:id",
+          element: <ViewUserByIdPage />,
+        },
+        {
+          path: "/user/edit/:id",
+          element: <EditUserByIdPage />,
+        },
+        {
+          path: "/user/create",
+          element: <CreateUserPage />,
+        },
+        {
+          path: "/slider/data",
+          element: <ViewSliderPage />,
+        },
+        {
+          path: "/slider/data/:id",
+          element: <ViewSliderByIdPage />,
+        },
+        {
+          path: "/slider/create",
+          element: <CreateSliderPage />,
+        },
+        //attribute
+        {
+          path: "/devisi/data",
+          element: <DataDevisiPage />,
+        },
+        {
+          path: "/penempatan/data",
+          element: <DataPenempatanPage />,
         },
       ],
     },
