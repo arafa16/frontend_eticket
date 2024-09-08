@@ -15,7 +15,7 @@ export const dataUserTable = () => {
     const [allPage, setAllPage] = useState(0);
     const [statusCode, setStatusCode] = useState(1);
     const [search, setSearch] = useState('');
-    const [is_delete, set_is_delete] = useState(1);
+    const [is_delete, set_is_delete] = useState(0);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -110,14 +110,9 @@ export const dataUserTable = () => {
                         <Lucide icon="FilePlus" className="w-4 h-4" />
                     </div>
                     <div>
-                    {/* <Lucide 
-                        icon="Edit3" 
-                        className="w-4 h-4" 
-                        onClick={()=>set_is_delete(is_delete !== 1 ? 0 : 1)}
-                        /> */}
                     <Menu>
                         <Menu.Button>
-                            <Lucide icon="Edit3" className="w-4 h-4" />
+                            <Lucide icon="Trash2" className="w-4 h-4" />
                         </Menu.Button>
                         <Menu.Items className="w-40 z-30 hover:z-40">
                             <Menu.Item 

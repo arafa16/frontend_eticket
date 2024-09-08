@@ -136,6 +136,20 @@ export const deleteUser: any = createAsyncThunk("user/deleteUser", async(datas :
     }
 });
 
+export const restoreUser: any = createAsyncThunk("user/restoreUser", async(datas : any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/user/restore/${datas.uuid}`, {
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+});
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -243,6 +257,21 @@ export const userSlice = createSlice({
             state.message = action.payload;
         });
         builder.addCase(deleteUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
+
+        //get executor
+        builder.addCase(restoreUser.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(restoreUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.message = action.payload;
+        });
+        builder.addCase(restoreUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

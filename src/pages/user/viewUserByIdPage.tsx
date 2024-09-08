@@ -10,7 +10,7 @@ const viewUserByIdPage = () => {
 
     const {dataResult} = getDataUserById({uuid:id})
 
-    const { message, deleteData } = deleteDataUser({uuid:id})
+    const { message, deleteData, restoreData } = deleteDataUser({uuid:id})
 
     const navigate = useNavigate();
     
@@ -41,7 +41,13 @@ const viewUserByIdPage = () => {
                             edit privilege
                         </Menu.Item>
                         <Menu.Item 
-                            className={`hover:bg-red-500 hover:text-white`}
+                            className={`${dataResult && dataResult.is_delete ? '' : 'hidden' } hover:bg-blue-500 hover:text-white`}
+                            onClick={(e:any)=>restoreData(e)}
+                            >
+                            Restore
+                        </Menu.Item>
+                        <Menu.Item 
+                            className={`${dataResult && dataResult.is_delete ? 'hidden' : '' } hover:bg-red-500 hover:text-white`}
                             onClick={(e:any)=>deleteData(e)}
                             >
                             Delete
