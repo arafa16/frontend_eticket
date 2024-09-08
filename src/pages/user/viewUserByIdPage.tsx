@@ -1,13 +1,16 @@
 import Button from '../../base-components/Button';
-import { getDataUserById } from '../../features/user/user';
+import { deleteDataUser, getDataUserById } from '../../features/user/user';
 import { useNavigate, useParams } from 'react-router-dom';
 import ViewUser from '../../features/user/viewUser';
 import ViewPrivilege from '../../features/privilege/viewPrivilege';
+import Menu from '../../base-components/Headless/Menu';
 
 const viewUserByIdPage = () => {
     const {id} = useParams();
 
     const {dataResult} = getDataUserById({uuid:id})
+
+    const { message, deleteData } = deleteDataUser({uuid:id})
 
     const navigate = useNavigate();
     
@@ -20,18 +23,31 @@ const viewUserByIdPage = () => {
                     onClick={()=>navigate(-1)}
                     >Back
                 </Button>
-                <Button 
-                    size='xs'
-                    variant='primary'
-                    onClick={()=>navigate(`/user/edit/${id}`)}
-                    >edit user
-                </Button>
-                <Button 
-                    size='xs'
-                    variant='primary'
-                    onClick={()=>navigate(`/privilege/edit/${dataResult && dataResult.privilege && dataResult.privilege.uuid}`)}
-                    >edit privilege
-                </Button>
+                <Menu>
+                    <Menu.Button>
+                        <Button  variant='primary' size='sm'>
+                            Action
+                        </Button>
+                    </Menu.Button>
+                    <Menu.Items className="w-40">
+                        <Menu.Item 
+                            onClick={()=>navigate(`/user/edit/${id}`)}
+                            >
+                            edit user
+                        </Menu.Item>
+                        <Menu.Item 
+                            onClick={()=>navigate(`/privilege/edit/${dataResult && dataResult.privilege && dataResult.privilege.uuid}`)}
+                            >
+                            edit privilege
+                        </Menu.Item>
+                        <Menu.Item 
+                            className={`hover:bg-red-500 hover:text-white`}
+                            onClick={(e:any)=>deleteData(e)}
+                            >
+                            Delete
+                        </Menu.Item>
+                    </Menu.Items>
+                </Menu>
             </div>
             <div className='mt-2'>
                 <ViewUser 

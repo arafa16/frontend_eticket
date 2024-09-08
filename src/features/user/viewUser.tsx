@@ -32,7 +32,7 @@ const viewUser = (props:any) => {
                     </div>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                            Devisi
+                            Penempatan
                         </div>
                         <div className="mt-1  text-slate-500">
                             {data && data.penempatan && data.penempatan.name}

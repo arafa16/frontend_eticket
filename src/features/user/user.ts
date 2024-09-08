@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById, getUserSelect, resetUser, updateUser, createUser } from "../../stores/features/userSlice";
+import { getUserById, getUserSelect, resetUser, updateUser, createUser, deleteUser } from "../../stores/features/userSlice";
 import { getExecutor, resetExecutor } from "../../stores/features/executorSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -137,4 +137,32 @@ export const createDataUser = (datas:any) => {
 
 
     return { message, submit }
+}
+
+export const deleteDataUser = (datas:any) => {   
+    const [message, setMessage] = useState<any>(null)
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const {data, isError, isSuccess, isLoading, message:messageUser} = useSelector(
+        (state : any) => state.user
+    )
+
+    useEffect(()=>{
+        if(messageUser && isSuccess){
+            if(!isLoading){
+                dispatch(resetUser());
+                navigate(-1);
+            }
+        }
+    },[messageUser, isLoading, isSuccess]);
+
+    const deleteData = (e:any) => {
+        e.preventDefault();
+        dispatch(deleteUser(datas));
+    }
+
+
+    return { message, deleteData }
 }

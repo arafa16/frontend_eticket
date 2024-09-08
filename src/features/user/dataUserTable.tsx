@@ -5,6 +5,8 @@ import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import Lucide from "../../base-components/Lucide";
 import { FormInput } from "../../base-components/Form";
+import Menu from "../../base-components/Headless/Menu";
+import Button from "../../base-components/Button";
 
 export const dataUserTable = () => {
     const [datas, setDatas] = useState<any>([]);
@@ -13,6 +15,7 @@ export const dataUserTable = () => {
     const [allPage, setAllPage] = useState(0);
     const [statusCode, setStatusCode] = useState(1);
     const [search, setSearch] = useState('');
+    const [is_delete, set_is_delete] = useState(1);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -31,11 +34,11 @@ export const dataUserTable = () => {
     },[data, isSuccess, isLoading])
     
     useEffect(()=>{
-        const paramsObj : any = {limit, page, allPage};
+        const paramsObj : any = {limit, page, allPage, search, is_delete};
         const searchParams = new URLSearchParams(paramsObj);
 
         dispatch(getUserTable(searchParams));
-    },[limit, page, allPage])
+    },[limit, page, allPage, search, is_delete])
 
     //table
     const countData = (allData : any) =>{
@@ -64,27 +67,27 @@ export const dataUserTable = () => {
                   <FormInput
                     type="text"
                     className="block px-3 py-1 mt-0 mx-2 text-xs"
-                    placeholder="search by name"
+                    placeholder="search by name or email"
                     name='search'
                     value={search}
                     onChange={(e)=>setSearch(e.target.value)}
                   />
                 </div>
-                <div className="flex items-center justify-end sm:ml-auto">
+                <div className="flex items-center justify-end gap-x-2 sm:ml-auto z-50">
                     <div className='flex items-center mx-4'>
                         <FormInput
                             type="text"
-                            className="block px-1 py-0 mt-0 w-10 mx-2 text-center text-xs"
+                            className="block px-1 py-0 mt-0 w-10 text-center text-xs"
                             placeholder="0"
                             name='limit'
-                            value={datas.count === 0 ? 0 : (limit > datas.count ? datas.count : limit)}
+                            value={limit}
                             onChange={(e:any)=>setLimit(e.target.value)}
                         /> 
                         <p className=' text-center text-xs'>/ {datas.count}</p>
                     </div>
-                <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
+                    <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                     <div
-                        className="flex items-center justify-center w-5 h-5 ml-5"
+                        className="flex items-center justify-center w-5 h-5"
                         >
                         <Lucide 
                             icon="ChevronLeft" 
@@ -92,7 +95,7 @@ export const dataUserTable = () => {
                             onClick={()=>prevPage()}/>
                     </div>
                     <div
-                        className="flex items-center justify-center w-5 h-5 ml-5"
+                        className="flex items-center justify-center w-5 h-5"
                         >
                         <Lucide 
                             icon="ChevronRight" 
@@ -101,14 +104,40 @@ export const dataUserTable = () => {
                             />
                     </div>
                     <div
-                        className="flex items-center justify-center w-5 h-5 ml-5 cursor-pointer hover:text-blue-500"
+                        className="flex items-center justify-center w-5 h-5 cursor-pointer hover:text-blue-500"
                         onClick={()=>navigate('/user/create')}
                         >
                         <Lucide icon="FilePlus" className="w-4 h-4" />
                     </div>
+                    <div>
+                    {/* <Lucide 
+                        icon="Edit3" 
+                        className="w-4 h-4" 
+                        onClick={()=>set_is_delete(is_delete !== 1 ? 0 : 1)}
+                        /> */}
+                    <Menu>
+                        <Menu.Button>
+                            <Lucide icon="Edit3" className="w-4 h-4" />
+                        </Menu.Button>
+                        <Menu.Items className="w-40 z-30 hover:z-40">
+                            <Menu.Item 
+                                className="z-30 hover:z-40"
+                                onClick={()=>set_is_delete(1)}
+                                >
+                                is Delete
+                            </Menu.Item>
+                            <Menu.Item 
+                            className="z-30 hover:z-40"
+                                onClick={()=>set_is_delete(0)}
+                                >
+                                is active
+                            </Menu.Item>
+                        </Menu.Items>
+                    </Menu>
+                    </div>
                 </div>
             </div>
-            <div className="overflow-x-auto sm:overflow-x-visible text-xs">
+            <div className="overflow-x-auto sm:overflow-x-visible text-xs ">
                 {datas.rows && datas.rows.map((data : any, index : any) => (
                     <div 
                         key={index} 

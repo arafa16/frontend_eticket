@@ -8,6 +8,7 @@ import clsx from "clsx";
 import {resetPassword} from '../../features/resetPassword';
 import { getMessageShow } from "../../features/messageShow";
 import { changePhotoProfile } from "../../features/setPhotoProfile";
+import userFoto from "../../assets/images/user/userNotFound.jpg";
 
 function Main(props: { 
     toggleMobileMenu: (event: React.MouseEvent) => void; 
@@ -62,7 +63,7 @@ function Main(props: {
         {/* END: Mobile Menu */}
         {/* BEGIN: Notifications */}
         <div className="flex items-center">
-        <Popover className="mr-5 intro-x sm:mr-6">
+        {/* <Popover className="mr-5 intro-x sm:mr-6">
           <Popover.Button
             className={clsx([
               "relative outline-none block",
@@ -104,16 +105,16 @@ function Main(props: {
               </div>
             ))}
           </Popover.Panel>
-        </Popover>
+        </Popover> */}
         {/* END: Notifications */}
         {/* BEGIN: Account Menu */}
         <Menu className="h-10 intro-x">
           <Menu.Button className="flex items-center h-full dropdown-toggle">
             <div className="w-10 h-10 image-fit">
               <img
-                alt="Rocketman - HTML Admin Template"
+                alt={userFoto}
                 className="border-2 border-white rounded-full shadow-lg border-opacity-10"
-                src={`http://localhost:5000${props.data && props.data.photo_link}`}
+                src={`${props.data && props.data.photo_link === null || props.data.photo_link === '' ? userFoto : import.meta.env.VITE_REACT_APP_API_URL+props.data.photo_link}`}
               />
             </div>
             <div className="hidden ml-3 md:block">
