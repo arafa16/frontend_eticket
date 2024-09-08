@@ -112,12 +112,11 @@ export const dataTicketUser = (datas:any) => {
                     </div>
                     </Table.Td>
                     <Table.Td className="first:rounded-l-md last:rounded-r-md w-24 py-0 bg-white border border-r-0 border-l-0 first:border-l last:border-r border-slate-200 dark:bg-darkmode-600 dark:border-darkmode-600 shadow-[20px_3px_20px_#0000000b]">
-                    <a
-                        href=""
+                    <p
                         className="underline text-xs decoration-dotted whitespace-nowrap"
                     >
                         {data.code_ticket}
-                    </a>
+                    </p>
                     </Table.Td>
                     <Table.Td className="max-sm:hidden lg: first:rounded-l-md last:rounded-r-md bg-white border border-r-0 border-l-0 first:border-l last:border-r border-slate-200 dark:bg-darkmode-600 dark:border-darkmode-600 shadow-[20px_3px_20px_#0000000b]">
                     <div className="font-medium text-xs whitespace-nowrap">

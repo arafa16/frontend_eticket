@@ -20,7 +20,6 @@ const editUserByIdPage = () => {
 
     useEffect(()=>{
         if(dataResult !== null){
-            console.log(dataResult, 'result')
             setDataUser(dataResult);
         }
         

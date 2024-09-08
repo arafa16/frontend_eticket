@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getStatusTicket, resetStatusTicket } from "../../stores/features/statusTicketSlice";
 import { UpdateStatusTicket, resetTicket } from "../../stores/features/ticketSlice";
+import { getStatusTicketByCode, resetStatusTicket2 } from "../../stores/features/statusTicket2Slice";
 
 export const statusTicketView = (datas:any) => {
     const [statusTicket, setStatusTicket] = useState<any>(0)
@@ -11,6 +12,10 @@ export const statusTicketView = (datas:any) => {
 
     const {data, isError, isSuccess, isLoading, message:messageStatusTicket} = useSelector(
         (state : any) => state.statusTicket
+    )
+
+    const {data:data2, isError:isError2, isSuccess:isSuccess2, isLoading:isLoading2, message:messageStatusTicket2} = useSelector(
+        (state : any) => state.statusTicket2
     )
 
     const {data:dataTicket, isError:isErrorTicket, isSuccess:isSuccessTicket, isLoading:isLoadingTicket, message:messageTicket} = useSelector(
@@ -56,6 +61,24 @@ export const statusTicketView = (datas:any) => {
             }));
         }
     }
+
+    useEffect(()=>{
+        if(isSuccess2 && data2){
+            if(!isLoading2){
+                // console.log(data2, 'data2')
+                dispatch(UpdateStatusTicket({
+                    uuid:datas.uuid,
+                    status_ticket_uuid:data2.data.uuid
+                }));
+                dispatch(resetStatusTicket2());
+            }
+        }
+    },[isSuccess2, data2, isLoading2]);
+
+    const clickToProcess = (code:any) => {
+        // alert(code)
+        dispatch(getStatusTicketByCode({code}))
+    }
     
     const status = (
         <div className="flex justify-end text-xs box">
@@ -71,5 +94,5 @@ export const statusTicketView = (datas:any) => {
         </div>
     )
 
-    return {status, message}
+    return {status, clickToProcess, statusTicket, message}
 }

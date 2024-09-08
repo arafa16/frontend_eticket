@@ -129,7 +129,12 @@ function Main() {
   }, [sideMenuStore, location.pathname]);
 
   //get data auth
-  const {data: dataMe, loading:loadingMe, message:messageMe} = getMeAuth();
+  const [privilege, setPrivilege] = useState<any>([])
+  const {data:dataMe, loading:loadingMe, message:messageMe} = getMeAuth();
+
+  useEffect(()=>{
+    setPrivilege(dataMe && dataMe.privilege);
+  },[dataMe])
 
   //logout
   const {data: dataLogout, loading:loadingLogout, message:messageLogout, handleLogout} = getLogoutAuth();
@@ -272,6 +277,7 @@ function Main() {
                       }`]: !menu.active,
                     })}
                     menu={menu}
+                    privilege={privilege}
                     simpleMenu={simpleMenu}
                     formattedMenuState={[formattedMenu, setFormattedMenu]}
                     level="first"
@@ -305,6 +311,7 @@ function Main() {
                               })}
                               menu={subMenu}
                               simpleMenu={simpleMenu}
+                              privilege={privilege}
                               formattedMenuState={[
                                 formattedMenu,
                                 setFormattedMenu,
@@ -413,6 +420,7 @@ function Menu(props: {
     wrapper: boolean;
   };
   menu: FormattedMenu;
+  privilege?:any;
   formattedMenuState: [
     (FormattedMenu | string)[],
     Dispatch<SetStateAction<(FormattedMenu | string)[]>>
@@ -422,10 +430,13 @@ function Menu(props: {
   const navigate = useNavigate();
   const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
 
+  const nameColom : any = props.menu.privilege;
+
   return (
     <a
       href={props.menu.subMenu ? "#" : props.menu.pathname}
       className={clsx([
+        `${props.privilege && props.privilege[nameColom] ? '' : 'hidden'}`,
         "h-[50px] flex items-center pl-5 mb-1 relative dark:text-slate-300 text-xs",
         {
           "bg-primary text-white rounded-xl dark:bg-transparent":

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import TableTemplate1 from '../../components/tableTemplate/tableTemplate1'
-import { getDataDevisiTable } from '../../features/devisi/devisi'
+import TableTemplate1 from '../../components/tableTemplate/tableTemplate1';
+import { getDataStatusUserTable } from '../../features/statusUser/statusUser';
 
-const dataDevisiPage = () => {
+const dataStatusUserPage = () => {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const [allPage, setAllPage] = useState(0);
     
-    const {data, loading} = getDataDevisiTable({})
+    const {data, isLoading} = getDataStatusUserTable({})
 
     return (
         <div>
@@ -19,11 +19,11 @@ const dataDevisiPage = () => {
                     page={page}
                     setPage={setPage}
                     allPage={allPage}
-                    linkCreate='/devisi/create'
+                    linkCreate='/statusUser/create'
                 />
-            </div>
+            </div>    
         </div>
     )
 }
 
-export default dataDevisiPage
+export default dataStatusUserPage

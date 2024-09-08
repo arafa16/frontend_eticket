@@ -7,9 +7,7 @@ const dataPenempatanPage = () => {
     const [page, setPage] = useState(1);
     const [allPage, setAllPage] = useState(0);
 
-    const {data, loading} = getDataPenempatan({})
-
-    console.log(data, 'data')
+    const {data, loading} = getDataPenempatan({});
     
     return (
         <div>
@@ -17,8 +15,11 @@ const dataPenempatanPage = () => {
                 <TableTemplate1 
                     datas={data}
                     limit={limit}
+                    setLimit={setLimit}
                     page={page}
+                    setPage={setPage}
                     allPage={allPage}
+                    linkCreate='/penempatan/create'
                 />
             </div>
         </div>

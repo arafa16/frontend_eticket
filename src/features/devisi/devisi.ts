@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectDevisi, getDevisiTable, resetDevisi } from "../../stores/features/devisiSlice";
+import { getSelectDevisi, getDevisiTable, resetDevisi, createDevisi } from "../../stores/features/devisiSlice";
+import { useNavigate } from "react-router-dom";
 
 export const getDevisiSelect = () => {
     const dispatch = useDispatch();
@@ -29,9 +30,10 @@ export const getDevisiSelect = () => {
 }
 
 export const getDataDevisiTable = (datas:any) => {
-    const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+
+    const dispatch = useDispatch();
 
     const {data:dataDevisi, isError:isErrorDevisi, isSuccess:isSuccessDevisi, isLoading:isLoadingDevisi, message:messageDevisi} = useSelector(
         (state : any) => state.devisi
@@ -52,4 +54,32 @@ export const getDataDevisiTable = (datas:any) => {
     },[])
 
     return {data, loading}
+}
+
+export const createDataDevisi = (datas:any) => {
+    const [message, set_message] = useState<any>(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {data:dataDevisi, isError:isErrorDevisi, isSuccess:isSuccessDevisi, isLoading:isLoadingDevisi, message:messageDevisi} = useSelector(
+        (state : any) => state.devisi
+    )
+
+    useEffect(()=>{
+        if(messageDevisi && isSuccessDevisi){
+            if(!isLoadingDevisi){
+                set_message(messageDevisi.data);
+                dispatch(resetDevisi());
+                navigate(-1);
+            }
+        }
+    },[messageDevisi, isSuccessDevisi, isLoadingDevisi])
+
+    const createAction = (e:any) => {
+        e.preventDefault();
+        dispatch(createDevisi(datas))
+    }
+
+    return {message, createAction}
 }

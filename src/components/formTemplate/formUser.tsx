@@ -1,8 +1,8 @@
 import Button from '../../base-components/Button'
 import { FormInput, FormSelect } from '../../base-components/Form'
-import { getDevisiSelect } from '../../features/devisi/devisiSelect';
+import { getDevisiSelect } from '../../features/devisi/devisi';
 import { getPenempatanSelect } from '../../features/penempatan/penempatan';
-import { getDataStatusUserSelect } from '../../features/statusUser/statusUserSelect';
+import { getDataStatusUserSelect } from '../../features/statusUser/statusUser';
 
 const FormUser = (props:any) => {
     const {
@@ -22,7 +22,7 @@ const FormUser = (props:any) => {
 
     const {penempatanSelect, loadingPenempatan} = getPenempatanSelect();
 
-    const {statusUserSelect, loadingStatusUser} = getDataStatusUserSelect();
+    const {data:statusUserSelect, loading:loadingStatusUser} = getDataStatusUserSelect();
 
     return (
         <div className="w-full box p-8">

@@ -1,10 +1,14 @@
 import Button from '../../base-components/Button';
-import { viewUserById } from '../../features/user/viewUserById'
+import { getDataUserById } from '../../features/user/user';
 import { useNavigate, useParams } from 'react-router-dom';
+import ViewUser from '../../features/user/viewUser';
+import ViewPrivilege from '../../features/privilege/viewPrivilege';
 
 const viewUserByIdPage = () => {
     const {id} = useParams();
-    const {view} = viewUserById({uuid:id});
+
+    const {dataResult} = getDataUserById({uuid:id})
+
     const navigate = useNavigate();
     
     return (
@@ -20,11 +24,24 @@ const viewUserByIdPage = () => {
                     size='xs'
                     variant='primary'
                     onClick={()=>navigate(`/user/edit/${id}`)}
-                    >edit
+                    >edit user
+                </Button>
+                <Button 
+                    size='xs'
+                    variant='primary'
+                    onClick={()=>navigate(`/privilege/edit/${dataResult && dataResult.privilege && dataResult.privilege.uuid}`)}
+                    >edit privilege
                 </Button>
             </div>
             <div className='mt-2'>
-            {view}
+                <ViewUser 
+                    data={dataResult}
+                />
+            </div>
+            <div className='mt-2'>
+                <ViewPrivilege 
+                    data={dataResult && dataResult.privilege}
+                />
             </div>
         </div>
     )

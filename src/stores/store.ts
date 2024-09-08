@@ -17,6 +17,7 @@ import noteTicketReducer from "./features/noteTicketSlice";
 import statusNoteReducer from "./features/statusNoteSlice";
 import statusUserReducer from "./features/statusUserSlice";
 import typeTicketReducer from "./features/typeTicketSlice";
+import privilegeSlice from "./features/privilegeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -37,7 +38,8 @@ export const store = configureStore({
     statusNote:statusNoteReducer,
     typeTicket:typeTicketReducer,
     executor:executorReducer,
-    statusUser:statusUserReducer
+    statusUser:statusUserReducer,
+    privilege:privilegeSlice
   },
 });
 

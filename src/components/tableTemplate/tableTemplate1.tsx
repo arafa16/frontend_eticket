@@ -12,9 +12,8 @@ const tableTemplate1 = (props:any) => {
         page, setPage,
         allPage, setAllPage,
         prevPage, nextPage,
+        linkCreate
     } = props;
-
-    console.log(datas, 'datas')
 
     const navigate = useNavigate();
     return (
@@ -63,7 +62,7 @@ const tableTemplate1 = (props:any) => {
                         </div>
                         <div
                             className="flex items-center justify-center w-5 h-5 ml-5 cursor-pointer hover:text-blue-500"
-                            onClick={()=>navigate('/user/create')}
+                            onClick={()=>navigate(linkCreate)}
                             >
                             <Lucide icon="FilePlus" className="w-4 h-4" />
                         </div>

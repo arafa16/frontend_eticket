@@ -22,7 +22,16 @@ import ViewSliderPage from "../pages/slider/viewSliderPage";
 import CreateSliderPage from "../pages/slider/createSliderPage";
 import ViewSliderByIdPage from "../pages/slider/viewSliderByIdPage";
 import DataDevisiPage from "../pages/devisi/dataDevisiPage";
+import CreateDevisiPage from "../pages/devisi/createDevisiPage";
 import DataPenempatanPage from "../pages/penempatan/dataPenempatanPage";
+import CreatePenempatanPage from "../pages/penempatan/createPenempatanPage";
+import DataStatusNotePage from "../pages/statusNote/dataStatusNotePage";
+import CreateStatusNotePage from "../pages/statusNote/createStatusNotePage";
+import DataStatusUserPage from "../pages/statusUser/dataStatusUserPage";
+import CreateStatusUserPage from "../pages/statusUser/createStatusUserPage";
+import DataTypeTicketPage from "../pages/typeTicket/dataTypeTicketPage";
+import CreateTypeTicketPage from "../pages/typeTicket/createTypeTicketPage";
+import EditPrivilegeById from "../pages/privilege/editPrivilegeById";
 
 function Router() {
   const routes = [
@@ -87,6 +96,10 @@ function Router() {
           element: <CreateUserPage />,
         },
         {
+          path: "/privilege/edit/:id",
+          element: <EditPrivilegeById />,
+        },
+        {
           path: "/slider/data",
           element: <ViewSliderPage />,
         },
@@ -104,8 +117,40 @@ function Router() {
           element: <DataDevisiPage />,
         },
         {
+          path: "/devisi/create",
+          element: <CreateDevisiPage />,
+        },
+        {
           path: "/penempatan/data",
           element: <DataPenempatanPage />,
+        },
+        {
+          path: "/penempatan/create",
+          element: <CreatePenempatanPage />,
+        },
+        {
+          path: "/statusNote/data",
+          element: <DataStatusNotePage />,
+        },
+        {
+          path: "/statusNote/create",
+          element: <CreateStatusNotePage />,
+        },
+        {
+          path: "/statusUser/data",
+          element: <DataStatusUserPage />,
+        },
+        {
+          path: "/statusUser/create",
+          element: <CreateStatusUserPage />,
+        },
+        {
+          path: "/typeTicket/data",
+          element: <DataTypeTicketPage />,
+        },
+        {
+          path: "/typeTicket/create",
+          element: <CreateTypeTicketPage />,
         },
       ],
     },
