@@ -63,11 +63,13 @@ const initialState: SideMenuState = {
           icon: "Bookmark",
           pathname: "/devisi/data",
           title: "Devisi",
+          privilege: "entity",
         },
         {
           icon: "Bookmark",
           pathname: "/penempatan/data",
           title: "Penempatan",
+          privilege: "entity",
         },
         {
           icon: "Bookmark",
@@ -78,11 +80,13 @@ const initialState: SideMenuState = {
           icon: "Bookmark",
           pathname: "/statusUser/data",
           title: "Status User",
+          privilege: "entity",
         },
         {
           icon: "Bookmark",
           pathname: "/typeTicket/data",
           title: "Type Ticket",
+          privilege: "entity",
         }
       ]
     },
