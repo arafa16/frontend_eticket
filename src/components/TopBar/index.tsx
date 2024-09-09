@@ -2,7 +2,6 @@ import { useState } from "react";
 import Lucide from "../../base-components/Lucide";
 import Breadcrumb from "../../base-components/Breadcrumb";
 import { Menu, Popover} from "../../base-components/Headless";
-import fakerData from "../../utils/faker";
 import _ from "lodash";
 import clsx from "clsx";
 import {resetPassword} from '../../features/resetPassword';
@@ -114,7 +113,7 @@ function Main(props: {
               <img
                 alt={userFoto}
                 className="border-2 border-white rounded-full shadow-lg border-opacity-10"
-                src={`${props.data && props.data.photo_link === null || props.data.photo_link === '' ? userFoto : import.meta.env.VITE_REACT_APP_API_URL}`}
+                src={props.data && props.data.photo_link ? `${import.meta.env.VITE_REACT_APP_API_URL+props.data.photo_link}` : userFoto }
               />
             </div>
             <div className="hidden ml-3 md:block">
