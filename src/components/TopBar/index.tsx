@@ -114,7 +114,7 @@ function Main(props: {
               <img
                 alt={userFoto}
                 className="border-2 border-white rounded-full shadow-lg border-opacity-10"
-                src={`${props.data && props.data.photo_link === null || props.data.photo_link === '' ? userFoto : import.meta.env.VITE_REACT_APP_API_URL+props.data.photo_link}`}
+                src={`${props.data && props.data.photo_link === null || props.data.photo_link === '' ? userFoto : import.meta.env.VITE_REACT_APP_API_URL}`}
               />
             </div>
             <div className="hidden ml-3 md:block">
