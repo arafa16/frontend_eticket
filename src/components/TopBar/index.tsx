@@ -8,6 +8,7 @@ import {resetPassword} from '../../features/resetPassword';
 import { getMessageShow } from "../../features/messageShow";
 import { changePhotoProfile } from "../../features/setPhotoProfile";
 import userFoto from "../../assets/images/user/userNotFound.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Main(props: { 
     toggleMobileMenu: (event: React.MouseEvent) => void; 
@@ -17,6 +18,8 @@ function Main(props: {
 
   const {modalResetPassword, message, showModal, setShowModal} = resetPassword({uuid:props.data.uuid});
 
+  const navigate = useNavigate();
+
   const {
     modalChangePhoto, 
     message:messagePhoto,
@@ -25,6 +28,8 @@ function Main(props: {
 
   //message
   const messageShow = getMessageShow(message);
+
+  
   return (
     <>
       {modalChangePhoto}
@@ -126,6 +131,11 @@ function Main(props: {
             </div>
           </Menu.Button>
           <Menu.Items className="w-56 mt-px">
+            <Menu.Item
+              onClick={()=>navigate(`/user/login/view/${props.data && props.data.uuid}`)}
+            >
+              <Lucide icon="User" className="w-4 h-4 mr-2" /> Profile
+            </Menu.Item>
             <Menu.Item
               onClick={()=>setShowModalPhoto(true)}
             >

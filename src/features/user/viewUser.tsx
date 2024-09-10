@@ -1,7 +1,7 @@
 import React from 'react'
 
 const viewUser = (props:any) => {
-    const {data} = props;
+    const {data, is_executor, is_delete} = props;
 
     return (
         <div className="w-full box p-8">
@@ -54,15 +54,15 @@ const viewUser = (props:any) => {
                             {data && data.status_user && data.status_user.name}
                         </div>
                     </div>
-                    <div>
-                        <div className="font-medium whitespace-nowrap">
+                    <div className={`${is_executor !== true ? 'hidden' : ''}`}>
+                        <div className={`font-medium whitespace-nowrap`}>
                             Is Executor
                         </div>
                         <div className="mt-1  text-slate-500">
                             {data && data.is_executor ? 'yes' : 'no'}
                         </div>
                     </div>
-                    <div>
+                    <div className={`${is_delete !== true ? 'hidden' : ''}`}>
                         <div className="font-medium whitespace-nowrap">
                             Is Delete
                         </div>

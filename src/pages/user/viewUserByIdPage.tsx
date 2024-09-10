@@ -58,6 +58,8 @@ const viewUserByIdPage = () => {
             <div className='mt-2'>
                 <ViewUser 
                     data={dataResult}
+                    is_executor={true}
+                    is_delete={true}
                 />
             </div>
             <div className='mt-2'>

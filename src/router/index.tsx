@@ -15,6 +15,8 @@ import CreateTicketAdminPage from "../pages/ticketAll/createTicketAdminPage";
 import ViewTicketAdminPage from "../pages/ticketAll/viewTicketAdminPage";
 import UpdateTicketAdminPage from "../pages/ticketAll/updateTicketAdminPage";
 import ViewDataUser from "../pages/user/viewDataUserPage";
+import ViewUserLoginPage from "../pages/user/viewUserLoginPage";
+import EditUserLoginPage from "../pages/user/editUserLoginPage";
 import ViewUserByIdPage from "../pages/user/viewUserByIdPage";
 import EditUserByIdPage from "../pages/user/editUserByIdPage";
 import CreateUserPage from "../pages/user/createUserPage";
@@ -86,6 +88,14 @@ function Router() {
         {
           path: "/user/data/",
           element: <ViewDataUser />,
+        },
+        {
+          path: "/user/login/view/:id",
+          element: <ViewUserLoginPage />,
+        },
+        {
+          path: "/user/login/edit/:id",
+          element: <EditUserLoginPage />,
         },
         {
           path: "/user/data/:id",

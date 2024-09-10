@@ -15,6 +15,8 @@ const FormUser = (props:any) => {
         isExecutor, setIsExecutor,
         password, setPassword,
         viewPassword,
+        viewStatus,
+        viewExecutor,
         submit
     } = props;
 
@@ -130,7 +132,7 @@ const FormUser = (props:any) => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div className={`${viewStatus !== true ? 'hidden' : ''}`}>
                         <div className="font-medium whitespace-nowrap">
                             Status User
                         </div>
@@ -149,7 +151,7 @@ const FormUser = (props:any) => {
                             </FormSelect>
                         </div>
                     </div>
-                    <div>
+                    <div className={`${viewExecutor !== true ? 'hidden' : ''}`}>
                         <div className="font-medium whitespace-nowrap">
                             Is Executor
                         </div>
