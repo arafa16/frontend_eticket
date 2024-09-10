@@ -81,7 +81,7 @@ export const statusTicketView = (datas:any) => {
     }
     
     const status = (
-        <div className="flex justify-end text-xs box">
+        <div className="md:flex md:justify-end text-xs box">
             {dataResult && dataResult.map((data :any, index:any)=>(
                 <div 
                     key={index} 

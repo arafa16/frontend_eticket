@@ -5,6 +5,8 @@ import { statusTicketView } from '../../features/statusTicket/statusTicketView';
 import { getMessageShow } from '../../features/messageShow';
 import { getDataNoteTicket } from '../../features/noteTicket/noteTicketPopUp';
 import { historyView } from '../../features/history/historyView';
+import UploadAttachment from '../../components/formTemplate/uploadAttachment';
+import { uploadDataAttachment } from '../../features/attachment/uploadAttachment';
 
 const viewTicketPage = () => {
   const {id} = useParams();
@@ -17,6 +19,8 @@ const viewTicketPage = () => {
 
   const {view:viewDataNoteTicket} = getDataNoteTicket({uuid:id, reload, isActive:false});
 
+  const {modal:modalAttachment, deleteFileAttachment, showModal, setShowModal} = uploadDataAttachment({uuid:id, reload});
+  
   //message
   const messageShow = getMessageShow(messageTicket);
 
@@ -25,6 +29,7 @@ const viewTicketPage = () => {
   return (
     <div className='mt-6'>
       {messageShow}
+      {modalAttachment}
       <div className='flex justify-end gap-x-4'>
         <Button 
           size='sm'
@@ -43,7 +48,16 @@ const viewTicketPage = () => {
           {status}
         </div>
         <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-12'>
-          {view}
+          <div className='w-full flex justify-end mb-4'>
+            <UploadAttachment 
+              datas={dataResult}
+              deleteFile={deleteFileAttachment}
+              setShowModal={setShowModal}
+            />
+          </div>
+          <div className='w-full'>
+            {view}
+          </div>
         </div>
         <div className='col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-12 text-xs'>
           {viewDataNoteTicket}
