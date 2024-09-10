@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createTicket, GetTicketById, resetTicket, updateTicket } from "../../stores/features/ticketSlice";
+import { createTicket, deleteTicket, GetTicketById, resetTicket, updateTicket } from "../../stores/features/ticketSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -120,4 +120,31 @@ export const getDataTicketById = (datas:any) => {
     },[datas.uuid])
 
     return {dataResult}
+}
+
+export const deleteDataTicket = () => {
+    const [message, set_message] = useState<any>(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {data, isError, isSuccess, isLoading, message:messageTicket} = useSelector(
+        (state : any) => state.ticket
+    )
+
+    useEffect(()=>{
+        if(isSuccess && messageTicket){
+            if(!isLoading){
+                set_message(messageTicket);
+                dispatch(resetTicket());
+                navigate(-1);
+            }
+        }
+    },[isSuccess, messageTicket, isLoading]);
+
+    const deleteAction = (data:any) => {
+        dispatch(deleteTicket({uuid:data.uuid}))
+    }
+
+    return {deleteAction, message}
 }

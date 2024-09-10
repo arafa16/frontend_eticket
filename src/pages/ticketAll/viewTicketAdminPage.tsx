@@ -8,6 +8,8 @@ import { historyView } from '../../features/history/historyView';
 import { slideOverNote } from '../../features/ticket/slideOverNote';
 import { uploadDataAttachment } from '../../features/attachment/uploadAttachment';
 import UploadAttachment from '../../components/formTemplate/uploadAttachment';
+import Menu from '../../base-components/Headless/Menu';
+import { deleteDataTicket } from '../../features/ticket/ticket';
 
 const viewTicketAdminPage = () => {
   const {id} = useParams();
@@ -23,6 +25,7 @@ const viewTicketAdminPage = () => {
 
   const {modal:modalAttachment, deleteFileAttachment, showModal, setShowModal} = uploadDataAttachment({uuid:id, reload});
 
+  const {deleteAction, message} = deleteDataTicket({uuid:id})
   //message
   const messageShow = getMessageShow(messageTicket);
 
@@ -35,19 +38,34 @@ const viewTicketAdminPage = () => {
       {form}
       {messageShow}
       {modalAttachment}
-      <div className='flex justify-end gap-x-4'>
+      <div className='flex justify-end gap-x-4 z-30'>
         <Button 
-          size='sm'
+          size='xs'
           variant='primary'
           onClick={()=>navigate('/ticket/admin/data')}
         >Back</Button>
-        <Button 
-          size='sm'
-          variant='primary'
-          onClick={()=>navigate(`/ticket/admin/edit/${id}`)}
-        >Edit</Button>
+        <Menu>
+            <Menu.Button>
+                <Button  variant='primary' size='xs'>
+                    Action
+                </Button>
+            </Menu.Button>
+            <Menu.Items className="w-40">
+                <Menu.Item 
+                    onClick={()=>navigate(`/ticket/admin/edit/${id}`)}
+                    >
+                    edit ticket
+                </Menu.Item>
+                <Menu.Item 
+                    onClick={()=>deleteAction({uuid:id})}
+                    className={'hover:bg-red-200'}
+                    >
+                    delete ticket
+                </Menu.Item>
+            </Menu.Items>
+        </Menu>
       </div>
-      <div className='grid grid-cols-12 2xl:pl-6 gap-x-6 gap-y-4 mt-4'>
+      <div className='grid grid-cols-12 2xl:pl-6 gap-x-6 gap-y-4 mt-4 z-30'>
         <div className='col-span-12 md:col-span-6 xl:col-span-12 2xl:col-span-12'>
           {status}
         </div>

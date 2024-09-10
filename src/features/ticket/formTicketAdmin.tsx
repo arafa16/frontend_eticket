@@ -61,7 +61,7 @@ export const formTicketAdmin = () => {
                 </FormSelect>
             </div>
             <div className="col-span-12 intro-y sm:col-span-6">
-                <FormLabel className='' htmlFor="pic">User {userId}</FormLabel>
+                <FormLabel className='' htmlFor="pic">User</FormLabel>
                 <FormSelect
                     formSelectSize="sm"
                     aria-label=".form-select-sm example"
