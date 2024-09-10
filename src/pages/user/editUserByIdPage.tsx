@@ -74,6 +74,8 @@ const editUserByIdPage = () => {
                     isExecutor={isExecutor}
                     setIsExecutor={setIsExecutor}
                     viewPassword={false}
+                    viewStatus={true}
+                    viewExecutor={true}
                     submit={updateUser}
                 />
             </div>
