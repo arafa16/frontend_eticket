@@ -3,11 +3,14 @@ import TableTemplate1 from '../../components/tableTemplate/tableTemplate1';
 import { getDataStatusUserTable } from '../../features/statusUser/statusUser';
 
 const dataStatusUserPage = () => {
-    const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(1);
-    const [allPage, setAllPage] = useState(0);
-    
-    const {data, isLoading} = getDataStatusUserTable({})
+
+    const {
+        data, isLoading,
+        limit, setLimit,
+        page, setPage,
+        allPage, setAllPage,
+        nextPage, prevPage
+    } = getDataStatusUserTable({})
 
     return (
         <div>
@@ -19,6 +22,8 @@ const dataStatusUserPage = () => {
                     page={page}
                     setPage={setPage}
                     allPage={allPage}
+                    nextPage={nextPage} 
+                    prevPage={prevPage}
                     linkCreate='/statusUser/create'
                 />
             </div>    

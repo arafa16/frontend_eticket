@@ -3,11 +3,13 @@ import TableTemplate1 from '../../components/tableTemplate/tableTemplate1'
 import { getDataDevisiTable } from '../../features/devisi/devisi'
 
 const dataDevisiPage = () => {
-    const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(1);
-    const [allPage, setAllPage] = useState(0);
-    
-    const {data, loading} = getDataDevisiTable({})
+    const {
+        data, loading,
+        limit, setLimit,
+        page, setPage,
+        allPage, setAllPage,
+        nextPage, prevPage
+    } = getDataDevisiTable({})
 
     return (
         <div>
@@ -19,6 +21,8 @@ const dataDevisiPage = () => {
                     page={page}
                     setPage={setPage}
                     allPage={allPage}
+                    nextPage={nextPage} 
+                    prevPage={prevPage}
                     linkCreate='/devisi/create'
                 />
             </div>

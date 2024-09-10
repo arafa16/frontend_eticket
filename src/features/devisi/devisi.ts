@@ -31,6 +31,9 @@ export const getDevisiSelect = () => {
 
 export const getDataDevisiTable = (datas:any) => {
     const [data, setData] = useState([]);
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+    const [allPage, setAllPage] = useState(0);
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
@@ -43,6 +46,7 @@ export const getDataDevisiTable = (datas:any) => {
         if(dataDevisi && isSuccessDevisi){
             if(!isLoadingDevisi){
                 setData(dataDevisi.data);
+                countData(dataDevisi.data.count);
                 setLoading(false)
                 dispatch(resetDevisi());
             }
@@ -50,10 +54,39 @@ export const getDataDevisiTable = (datas:any) => {
     },[dataDevisi, isSuccessDevisi, isLoadingDevisi])
 
     useEffect(()=>{
-        dispatch(getDevisiTable(datas));
-    },[])
+        const paramsObj : any = {limit, page};
+        const searchParams = new URLSearchParams(paramsObj);
 
-    return {data, loading}
+        dispatch(getDevisiTable(searchParams));
+    },[limit, page])
+
+    //table
+    const countData = (allData : any) =>{
+        const count = allData / limit;
+        setAllPage(Math.ceil(count))
+    }
+
+    const nextPage = () => {
+        if(page < allPage){
+            const count = page + 1;
+            setPage(count);
+        }
+    }
+
+    const prevPage = () => {
+        if(page > 1){
+            const count = page - 1;
+            setPage(count);
+        }
+    }
+
+    return {
+        data, loading,
+        limit, setLimit,
+        page, setPage,
+        allPage, setAllPage,
+        nextPage, prevPage
+    }
 }
 
 export const createDataDevisi = (datas:any) => {

@@ -3,11 +3,13 @@ import { getDataPenempatan } from '../../features/penempatan/penempatan';
 import TableTemplate1 from '../../components/tableTemplate/tableTemplate1';
 
 const dataPenempatanPage = () => {
-    const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(1);
-    const [allPage, setAllPage] = useState(0);
-
-    const {data, loading} = getDataPenempatan({});
+    const {
+        data, loading,
+        limit, setLimit,
+        page, setPage,
+        allPage, setAllPage,
+        nextPage, prevPage
+    } = getDataPenempatan({});
     
     return (
         <div>
@@ -19,6 +21,8 @@ const dataPenempatanPage = () => {
                     page={page}
                     setPage={setPage}
                     allPage={allPage}
+                    nextPage={nextPage} 
+                    prevPage={prevPage}
                     linkCreate='/penempatan/create'
                 />
             </div>

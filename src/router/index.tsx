@@ -31,6 +31,7 @@ import DataStatusUserPage from "../pages/statusUser/dataStatusUserPage";
 import CreateStatusUserPage from "../pages/statusUser/createStatusUserPage";
 import DataTypeTicketPage from "../pages/typeTicket/dataTypeTicketPage";
 import CreateTypeTicketPage from "../pages/typeTicket/createTypeTicketPage";
+import UpdateTypeTicketPage from "../pages/typeTicket/updateTypeTicketPage";
 import EditPrivilegeById from "../pages/privilege/editPrivilegeById";
 
 function Router() {
@@ -151,6 +152,10 @@ function Router() {
         {
           path: "/typeTicket/create",
           element: <CreateTypeTicketPage />,
+        },
+        {
+          path: "/typeTicket/update/:id",
+          element: <UpdateTypeTicketPage />,
         },
       ],
     },

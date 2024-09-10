@@ -12,7 +12,8 @@ const tableTemplate1 = (props:any) => {
         page, setPage,
         allPage, setAllPage,
         prevPage, nextPage,
-        linkCreate
+        linkCreate,
+        linkUpdate
     } = props;
 
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const tableTemplate1 = (props:any) => {
         <div>
             <div className="box w-full">
                 <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-500 border-slate-200/60">
-                    <div className='flex items-center mx-4'>
+                    {/* <div className='flex items-center '>
                     <FormInput
                         type="text"
                         className="block px-3 py-1 mt-0 mx-2 text-xs"
@@ -29,9 +30,9 @@ const tableTemplate1 = (props:any) => {
                         value={search}
                         onChange={(e)=>setSearch(e.target.value)}
                     />
-                    </div>
-                    <div className="flex items-center justify-end sm:ml-auto">
-                        <div className='flex items-center mx-4'>
+                    </div> */}
+                    <div className="flex items-center justify-end gap-x-4 sm:ml-auto">
+                        <div className='flex items-center'>
                             <FormInput
                                 type="text"
                                 className="block px-1 py-0 mt-0 w-10 mx-2 text-center text-xs"
@@ -42,9 +43,9 @@ const tableTemplate1 = (props:any) => {
                             /> 
                             <p className=' text-center text-xs'>/ {datas && datas.count}</p>
                         </div>
-                    <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
+                        <div className="text-xs">{page <= allPage ? page : allPage} of {allPage} page </div>
                         <div
-                            className="flex items-center justify-center w-5 h-5 ml-5"
+                            className="w-5 h-5"
                             >
                             <Lucide 
                                 icon="ChevronLeft" 
@@ -52,7 +53,7 @@ const tableTemplate1 = (props:any) => {
                                 onClick={()=>prevPage()}/>
                         </div>
                         <div
-                            className="flex items-center justify-center w-5 h-5 ml-5"
+                            className="w-5 h-5"
                             >
                             <Lucide 
                                 icon="ChevronRight" 
@@ -61,7 +62,7 @@ const tableTemplate1 = (props:any) => {
                                 />
                         </div>
                         <div
-                            className="flex items-center justify-center w-5 h-5 ml-5 cursor-pointer hover:text-blue-500"
+                            className="w-5 h-5 cursor-pointer hover:text-blue-500"
                             onClick={()=>navigate(linkCreate)}
                             >
                             <Lucide icon="FilePlus" className="w-4 h-4" />
@@ -73,7 +74,7 @@ const tableTemplate1 = (props:any) => {
                         <div 
                             key={index} 
                             className="intro-y"
-                            onClick={()=>navigate(`/user/data/${data.uuid}`)}
+                            onClick={()=>navigate(`${linkUpdate+data.uuid}`)}
                             >
                             <div
                                 className={clsx([
