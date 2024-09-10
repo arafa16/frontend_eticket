@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectDevisi, getDevisiTable, resetDevisi, createDevisi } from "../../stores/features/devisiSlice";
+import { getSelectDevisi, getDevisiTable, resetDevisi, createDevisi, getDevisiById, updateDevisi } from "../../stores/features/devisiSlice";
 import { useNavigate } from "react-router-dom";
 
 export const getDevisiSelect = () => {
@@ -27,6 +27,31 @@ export const getDevisiSelect = () => {
     },[])
 
     return {devisiSelect, loadingDevisi}
+}
+
+export const getDataDevisiById = (datas:any) => {
+    const [dataResult, setDataResult] = useState<any>(null);
+
+    const dispatch = useDispatch();
+
+    const {data, isError, isSuccess, isLoading, message} = useSelector(
+        (state : any) => state.devisi
+    )
+
+    useEffect(()=>{
+        if(data && isSuccess){
+            if(!isLoading){
+                setDataResult(data.data);
+                dispatch(resetDevisi());
+            }
+        }
+    },[data, isSuccess, isLoading])
+
+    useEffect(()=>{
+        dispatch(getDevisiById({uuid:datas.uuid}));
+    },[datas.uuid])
+
+    return {dataResult}
 }
 
 export const getDataDevisiTable = (datas:any) => {
@@ -115,4 +140,32 @@ export const createDataDevisi = (datas:any) => {
     }
 
     return {message, createAction}
+}
+
+export const updateDataDevisi = (datas:any) => {
+    const [message, set_message] = useState<any>(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {data:dataDevisi, isError:isErrorDevisi, isSuccess:isSuccessDevisi, isLoading:isLoadingDevisi, message:messageDevisi} = useSelector(
+        (state : any) => state.devisi
+    )
+
+    useEffect(()=>{
+        if(messageDevisi && isSuccessDevisi){
+            if(!isLoadingDevisi){
+                set_message(messageDevisi.data);
+                dispatch(resetDevisi());
+                navigate(-1);
+            }
+        }
+    },[messageDevisi, isSuccessDevisi, isLoadingDevisi])
+
+    const updateAction = (e:any) => {
+        e.preventDefault();
+        dispatch(updateDevisi(datas))
+    }
+
+    return {message, updateAction}
 }

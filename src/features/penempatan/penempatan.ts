@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectPenempatan, getPenempatanTable, resetPenempatan, createPenempatan } from "../../stores/features/penempatanSlice";
+import { getSelectPenempatan, getPenempatanTable, resetPenempatan, createPenempatan, getPenempatanById, updatePenempatan } from "../../stores/features/penempatanSlice";
 import { useNavigate } from "react-router-dom";
 
 export const getPenempatanSelect = () => {
@@ -27,6 +27,31 @@ export const getPenempatanSelect = () => {
     },[])
 
     return {penempatanSelect, loadingPenempatan}
+}
+
+export const getDataPenempatanById = (datas:any) => {
+    const [dataResult, setDataResult] = useState<any>(null);
+
+    const dispatch = useDispatch();
+
+    const {data, isError, isSuccess, isLoading, message} = useSelector(
+        (state : any) => state.penempatan
+    )
+
+    useEffect(()=>{
+        if(data && isSuccess){
+            if(!isLoading){
+                setDataResult(data.data);
+                dispatch(resetPenempatan());
+            }
+        }
+    },[data, isSuccess, isLoading])
+
+    useEffect(()=>{
+        dispatch(getPenempatanById({uuid:datas.uuid}));
+    },[datas.uuid])
+
+    return {dataResult}
 }
 
 export const getDataPenempatan = (datas:any) => {
@@ -115,4 +140,32 @@ export const createDataPenempatan = (datas:any) => {
     }
 
     return {message, createAction}
+}
+
+export const updateDataPenempatan = (datas:any) => {
+    const [message, set_message] = useState<any>(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {data:dataPenempatan, isError:isErrorPenempatan, isSuccess, isLoading, message:messagePenempatan} = useSelector(
+        (state : any) => state.penempatan
+    )
+
+    useEffect(()=>{
+        if(messagePenempatan && isSuccess){
+            if(!isLoading){
+                set_message(messagePenempatan.data);
+                dispatch(resetPenempatan());
+                navigate(-1);
+            }
+        }
+    },[messagePenempatan, isSuccess, isLoading])
+
+    const updateAction = (e:any) => {
+        e.preventDefault();
+        dispatch(updatePenempatan(datas))
+    }
+
+    return {message, updateAction}
 }

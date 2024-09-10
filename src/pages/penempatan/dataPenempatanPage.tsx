@@ -24,6 +24,7 @@ const dataPenempatanPage = () => {
                     nextPage={nextPage} 
                     prevPage={prevPage}
                     linkCreate='/penempatan/create'
+                    linkUpdate='/penempatan/update/'
                 />
             </div>
         </div>

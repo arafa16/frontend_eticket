@@ -23,8 +23,10 @@ import CreateSliderPage from "../pages/slider/createSliderPage";
 import ViewSliderByIdPage from "../pages/slider/viewSliderByIdPage";
 import DataDevisiPage from "../pages/devisi/dataDevisiPage";
 import CreateDevisiPage from "../pages/devisi/createDevisiPage";
+import UpdateDevisiPage from "../pages/devisi/updateDevisiPage";
 import DataPenempatanPage from "../pages/penempatan/dataPenempatanPage";
 import CreatePenempatanPage from "../pages/penempatan/createPenempatanPage";
+import UpdatePenempatanPage from "../pages/penempatan/updatePenempatanPage";
 import DataStatusNotePage from "../pages/statusNote/dataStatusNotePage";
 import CreateStatusNotePage from "../pages/statusNote/createStatusNotePage";
 import DataStatusUserPage from "../pages/statusUser/dataStatusUserPage";
@@ -123,12 +125,20 @@ function Router() {
           element: <CreateDevisiPage />,
         },
         {
+          path: "/devisi/update/:id",
+          element: <UpdateDevisiPage />,
+        },
+        {
           path: "/penempatan/data",
           element: <DataPenempatanPage />,
         },
         {
           path: "/penempatan/create",
           element: <CreatePenempatanPage />,
+        },
+        {
+          path: "/penempatan/update/:id",
+          element: <UpdatePenempatanPage />,
         },
         {
           path: "/statusNote/data",

@@ -31,6 +31,20 @@ export const getSelectPenempatan: any = createAsyncThunk("penempatan/getSelectPe
     }
 });
 
+export const getPenempatanById: any = createAsyncThunk("penempatan/getPenempatanById", async(datas:any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/penempatan/data/${datas.uuid}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+});
+
 export const getPenempatanTable: any = createAsyncThunk("penempatan/getPenempatanTable", async(datas, thunkAPI) => {
     try {
         const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/penempatan/data?${datas}`,{
@@ -48,6 +62,25 @@ export const getPenempatanTable: any = createAsyncThunk("penempatan/getPenempata
 export const createPenempatan: any = createAsyncThunk("penempatan/createPenempatan", async(datas:any, thunkAPI) => {
     try {
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/penempatan/data`,{
+            name:datas.name,
+            sequence:datas.sequence, 
+            is_select:datas.is_select, 
+            is_active:datas.is_active
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+        
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+});
+
+export const updatePenempatan: any = createAsyncThunk("penempatan/updatePenempatan", async(datas:any, thunkAPI) => {
+    try {
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/penempatan/data/${datas.uuid}`,{
             name:datas.name,
             sequence:datas.sequence, 
             is_select:datas.is_select, 
@@ -86,6 +119,21 @@ export const penempatanSlice = createSlice({
             state.message = action.payload;
         });
 
+        //by id
+        builder.addCase(getPenempatanById.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(getPenempatanById.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.data = action.payload;
+        });
+        builder.addCase(getPenempatanById.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
+
         //datas
         builder.addCase(getPenempatanTable.pending, (state) => {
             state.isLoading = true;
@@ -111,6 +159,21 @@ export const penempatanSlice = createSlice({
             state.message = action.payload;
         });
         builder.addCase(createPenempatan.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
+
+        //update
+        builder.addCase(updatePenempatan.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(updatePenempatan.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.message = action.payload;
+        });
+        builder.addCase(updatePenempatan.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

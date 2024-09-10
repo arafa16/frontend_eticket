@@ -24,6 +24,7 @@ const dataDevisiPage = () => {
                     nextPage={nextPage} 
                     prevPage={prevPage}
                     linkCreate='/devisi/create'
+                    linkUpdate='/devisi/update/'
                 />
             </div>
         </div>
