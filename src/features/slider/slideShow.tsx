@@ -14,8 +14,6 @@ export const SlideShow = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    console.log(datas, 'data');
     
     useEffect(()=>{
         if(isSuccess && dataSlide){
@@ -49,7 +47,7 @@ export const SlideShow = () => {
                                 <img 
                                     src={import.meta.env.VITE_REACT_APP_API_URL+data.file_link} 
                                     alt="not found" 
-                                    className="h-full w-full"
+                                    className="w-full"
                                 />
                             </div>
                         </div>
