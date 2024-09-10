@@ -29,6 +29,7 @@ import DataStatusNotePage from "../pages/statusNote/dataStatusNotePage";
 import CreateStatusNotePage from "../pages/statusNote/createStatusNotePage";
 import DataStatusUserPage from "../pages/statusUser/dataStatusUserPage";
 import CreateStatusUserPage from "../pages/statusUser/createStatusUserPage";
+import UpdateStatusUserPage from "../pages/statusUser/updateStatusUserPage";
 import DataTypeTicketPage from "../pages/typeTicket/dataTypeTicketPage";
 import CreateTypeTicketPage from "../pages/typeTicket/createTypeTicketPage";
 import UpdateTypeTicketPage from "../pages/typeTicket/updateTypeTicketPage";
@@ -144,6 +145,10 @@ function Router() {
         {
           path: "/statusUser/create",
           element: <CreateStatusUserPage />,
+        },
+        {
+          path: "/statusUser/update/:id",
+          element: <UpdateStatusUserPage />,
         },
         {
           path: "/typeTicket/data",

@@ -25,6 +25,7 @@ const dataStatusUserPage = () => {
                     nextPage={nextPage} 
                     prevPage={prevPage}
                     linkCreate='/statusUser/create'
+                    linkUpdate='/statusUser/update/'
                 />
             </div>    
         </div>
