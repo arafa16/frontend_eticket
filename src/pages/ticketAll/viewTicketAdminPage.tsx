@@ -25,7 +25,7 @@ const viewTicketAdminPage = () => {
 
   const {modal:modalAttachment, deleteFileAttachment, showModal, setShowModal} = uploadDataAttachment({uuid:id, reload});
 
-  const {deleteAction, message} = deleteDataTicket({uuid:id})
+  const {deleteAction, message} = deleteDataTicket()
   //message
   const messageShow = getMessageShow(messageTicket);
 
