@@ -25,6 +25,8 @@ export const LoginUser: any = createAsyncThunk("auth/LoginUser", async(data : an
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
+
+        console.log(response, 'login')
         return response.data;
     } catch (error: any) {
         if(error.response){
