@@ -11,6 +11,7 @@ import executorReducer from "./features/executorSlice";
 import photoReducer from "./features/photoSlice";
 import sliderReducer from "./features/sliderSlice";
 import ticketReducer from "./features/ticketSlice";
+import ticket2Reducer from "./features/ticket2Slice";
 import statusTicketReducer from "./features/statusTicketSlice";
 import statusTicket2Reducer from "./features/statusTicket2Slice";
 import noteTicketReducer from "./features/noteTicketSlice";
@@ -33,6 +34,7 @@ export const store = configureStore({
     photo: photoReducer,
     slider: sliderReducer,
     ticket: ticketReducer,
+    ticket2: ticket2Reducer,
     statusTicket:statusTicketReducer,
     statusTicket2:statusTicket2Reducer,
     noteTicket:noteTicketReducer,

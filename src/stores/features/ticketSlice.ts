@@ -72,19 +72,6 @@ export const GetTicketById: any = createAsyncThunk("ticket/GetTicketById", async
     }
 });
 
-export const deleteTicket: any = createAsyncThunk("ticket/deleteTicket", async(datas:any, thunkAPI) => {
-    try {
-        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/ticket/${datas.uuid}`,{
-            withCredentials: true, // Now this is was the missing piece in the client side 
-        });
-        return response.data;
-    } catch (error: any) {
-        if(error.response){
-            return thunkAPI.rejectWithValue(error.response);
-        }
-    }
-});
-
 export const createTicket: any = createAsyncThunk("ticket/createTicket", async(datas:any, thunkAPI) => {
     try {
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/ticket/`,{
@@ -217,21 +204,6 @@ export const ticketSlice = createSlice({
             state.message = action.payload;
         });
         builder.addCase(UpdateStatusTicket.rejected, (state, action) => {
-            state.isLoading = false;
-            state.isError = true;
-            state.message = action.payload;
-        });
-
-        //update status ticket
-        builder.addCase(deleteTicket.pending, (state) => {
-            state.isLoading = true;
-        });
-        builder.addCase(deleteTicket.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isSuccess = true;
-            state.message = action.payload;
-        });
-        builder.addCase(deleteTicket.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

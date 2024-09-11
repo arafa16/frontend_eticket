@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { createTicket, deleteTicket, GetTicketById, resetTicket, updateTicket } from "../../stores/features/ticketSlice";
+import { createTicket, GetTicketById, resetTicket, updateTicket } from "../../stores/features/ticketSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteTicket, resetTicket2 } from "../../stores/features/ticket2Slice";
 
 export const createDataTicket = (datas:any) => {
 
@@ -129,14 +130,14 @@ export const deleteDataTicket = () => {
     const navigate = useNavigate();
 
     const {data, isError, isSuccess, isLoading, message:messageTicket} = useSelector(
-        (state : any) => state.ticket
+        (state : any) => state.ticket2
     )
 
     useEffect(()=>{
         if(isSuccess && messageTicket){
             if(!isLoading){
                 set_message(messageTicket);
-                dispatch(resetTicket());
+                dispatch(resetTicket2());
                 navigate(-1);
             }
         }
