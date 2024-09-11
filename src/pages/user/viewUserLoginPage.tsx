@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getDataUserById } from '../../features/user/user';
 import ViewUser from '../../features/user/viewUser';
 import Button from '../../base-components/Button';
+import UserPhoto from '../../components/user/userPhoto';
 
 const viewUserLoginPage = () => {
     const {id} = useParams();
@@ -12,7 +13,12 @@ const viewUserLoginPage = () => {
     const {dataResult} = getDataUserById({uuid:id})
 
     return (
-        <div>
+        <div className='w-full'>
+            <div className='w-full md:w-1/4'>
+                <UserPhoto 
+                    data={dataResult}
+                />
+            </div>
             <div className='flex justify-end mt-8 gap-x-4'>
                 <Button 
                     size='xs'
