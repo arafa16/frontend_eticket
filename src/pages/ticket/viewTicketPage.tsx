@@ -47,7 +47,7 @@ const viewTicketPage = () => {
         <div className='col-span-12 md:col-span-6 xl:col-span-12 2xl:col-span-12'>
           {status}
         </div>
-        <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-12'>
+        <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-9'>
           <div className='w-full flex justify-end mb-4'>
             <UploadAttachment 
               datas={dataResult}
@@ -59,10 +59,10 @@ const viewTicketPage = () => {
             {view}
           </div>
         </div>
-        <div className='col-span-12 md:col-span-6 xl:col-span-3 2xl:col-span-12 text-xs'>
+        <div className='col-span-12 md:col-span-3 xl:col-span-3 2xl:col-span-3 text-xs'>
           {viewDataNoteTicket}
         </div>
-        <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-12 text-xs'>
+        <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-9 text-xs'>
         {viewHistory}
       </div>
       </div>
