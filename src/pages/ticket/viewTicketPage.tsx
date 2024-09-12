@@ -40,7 +40,7 @@ const viewTicketPage = () => {
           size='sm'
           variant='primary'
           onClick={()=>clickToProcess(2)}
-          className={`${statusTicket === 2 ? 'hidden' : ''}`}
+          className={`${statusTicket === 1 ? '' : 'hidden'}`}
         >Set To Pengajuan</Button>
       </div>
       <div className='grid grid-cols-12 2xl:pl-6 gap-x-6 gap-y-4 mt-4'>
