@@ -14,6 +14,7 @@ export const dataTicketAll = (datas:any) => {
     const [limit, setLimit] = useState(5);
     const [allPage, setAllPage] = useState(5);
     const [notStatus, setNotStatus] = useState([]);
+    const [search, setSearch] = useState('')
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,12 +38,12 @@ export const dataTicketAll = (datas:any) => {
     },[isSuccess, data, isLoading])
 
     useEffect(()=>{
-        const paramsObj : any = { page, limit, notStatus};
+        const paramsObj : any = { page, limit, notStatus, search};
         const searchParams = new URLSearchParams(paramsObj);
 
         dispatch(GetTicket(searchParams.toString()));
 
-    },[page, limit, notStatus])
+    },[page, limit, notStatus, search])
 
     //table
     const countData = (allData : any) =>{
@@ -67,6 +68,20 @@ export const dataTicketAll = (datas:any) => {
     const dataTicket:any = (
         <div className="intro-y col-span-12">
             <div className="flex flex-col-reverse px-5 py-4 border-b sm:flex-row text-slate-700 border-slate-200/60">
+                <div className="sm:mr-auto text-xs">
+                    <div className="mx-5">
+                        <FormInput
+                            formInputSize="xs"
+                            id="search"
+                            type="text"
+                            name='search'
+                            placeholder="search"
+                            className='w-30 text-left'
+                            value={search}
+                            onChange={(e :any)=>setSearch(e.target.value)}
+                        />
+                    </div>
+                </div>
                 <div className="flex items-center justify-end sm:ml-auto text-xs">
                     <div className="mx-5">
                         <FormInput
