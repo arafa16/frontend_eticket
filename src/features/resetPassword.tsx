@@ -71,7 +71,7 @@ export const resetPassword = (datas:any) => {
                 <div className="col-span-12 sm:col-span-12">
                     <FormInput
                         id="modal-form-1"
-                        type="text"
+                        type="password"
                         placeholder="new password"
                         value={password}
                         onChange={(e)=>setPassword(e.target.value)}
@@ -80,7 +80,7 @@ export const resetPassword = (datas:any) => {
                 <div className="col-span-12 sm:col-span-12">
                     <FormInput
                         id="modal-form-1"
-                        type="text"
+                        type="password"
                         placeholder="confirmation password"
                         value={confPassword}
                         onChange={(e)=>setConfPassword(e.target.value)}
