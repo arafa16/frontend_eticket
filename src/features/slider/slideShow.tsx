@@ -40,7 +40,7 @@ export const SlideShow = () => {
                     options={{
                     controls: true,
                     }}
-                >
+                    >
                     {datas && datas.map((data:any, key:string)=>(
                         <div key={key} className={`h-32 px-2`}>
                             <div className="h-full rounded-md bg-slate-100 dark:bg-darkmode-400">

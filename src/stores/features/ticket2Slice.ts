@@ -30,6 +30,22 @@ export const deleteTicket: any = createAsyncThunk("ticket/deleteTicket", async(d
     }
 });
 
+export const GetCountTicket: any = createAsyncThunk("ticket/GetCountTicket", async(datas:any, thunkAPI) => {
+    try {
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/ticket/count?${datas}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
+
+        console.log(datas, 'responser')
+
+        return response.data;
+    } catch (error: any) {
+        if(error.response){
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+});
+
 
 export const ticket2Slice = createSlice({
     name: "ticket2",
@@ -54,6 +70,20 @@ export const ticket2Slice = createSlice({
             state.message = action.payload;
         });
 
+        //get count
+        builder.addCase(GetCountTicket.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(GetCountTicket.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.data = action.payload;
+        });
+        builder.addCase(GetCountTicket.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        });
     }
 })
 

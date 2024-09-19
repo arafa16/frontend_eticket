@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createTicket, GetTicketById, resetTicket, updateTicket } from "../../stores/features/ticketSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteTicket, resetTicket2 } from "../../stores/features/ticket2Slice";
+import { deleteTicket, GetCountTicket, resetTicket2 } from "../../stores/features/ticket2Slice";
 
 export const createDataTicket = (datas:any) => {
 
@@ -119,6 +119,48 @@ export const getDataTicketById = (datas:any) => {
         }
 
     },[datas.uuid])
+
+    return {dataResult}
+}
+
+export const getDataCountTicket = (datas:any) => {
+    const [dataResult, setDataResult] = useState<any>(null);
+    
+    const dispatch = useDispatch();
+
+    const {data, isError, isSuccess, isLoading, message} = useSelector(
+        (state : any) => state.ticket2
+    )
+
+    useEffect(()=>{
+        if(isSuccess && data){
+            if(!isLoading){
+                setDataResult(data.data);
+                dispatch(resetTicket2());
+            }
+        }
+    },[isSuccess, data, isLoading])
+
+    useEffect(()=>{
+        console.log(datas.uuid_user, 'datas')
+        if(datas.uuid_user !== undefined){
+            const paramsObj : any = {uuid_user:datas.uuid_user};
+            const searchParams = new URLSearchParams(paramsObj);
+
+            dispatch(GetCountTicket(searchParams.toString()));
+        }
+
+        if(datas.uuid_pic !== undefined){
+            const paramsObj : any = {uuid_pic:datas.uuid_pic};
+            const searchParams = new URLSearchParams(paramsObj);
+
+            dispatch(GetCountTicket(searchParams.toString()));
+        }
+
+        if(datas.uuid_user === undefined && datas.uuid_pic === undefined){
+            dispatch(GetCountTicket());
+        }
+    },[datas.uuid_user, datas.uuid_pic])
 
     return {dataResult}
 }

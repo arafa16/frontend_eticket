@@ -13,8 +13,9 @@ export const dataTicketAll = (datas:any) => {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(5);
     const [allPage, setAllPage] = useState(5);
+    const [count, setCount] = useState(0);
     const [notStatus, setNotStatus] = useState([]);
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const dataTicketAll = (datas:any) => {
             if(!isLoading){
                 setDataResult(data.data.rows);
                 countData(data.data.count);
+                setCount(data.data.count);
                 dispatch(resetTicket());
             }
         }
@@ -94,7 +96,7 @@ export const dataTicketAll = (datas:any) => {
                             onChange={(e :any)=>setLimit(e.target.value)}
                         />
                     </div>
-                    <div>{page <= allPage ? page : allPage} of {allPage} page </div>
+                    <div>{page <= allPage ? page : allPage} of {allPage} page | {count} data</div>
                     <div
                         className="flex items-center justify-center w-5 h-5 ml-5"
                         >
