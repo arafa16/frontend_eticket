@@ -74,7 +74,7 @@ const generalReportTicket = (props:any) => {
                             <Tippy
                             as="div"
                             className="flex items-center pl-2 cursor-pointer text-success"
-                            content="Draft"
+                            content="Pengajuan"
                             >
                             {data && data.pengajuan}
                             </Tippy>
@@ -142,7 +142,7 @@ const generalReportTicket = (props:any) => {
                             <Tippy
                             as="div"
                             className="flex items-center pl-2 cursor-pointer text-success"
-                            content="Cancel"
+                            content="Done"
                             >
                             {data && data.done}
                             </Tippy>
