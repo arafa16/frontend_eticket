@@ -117,5 +117,6 @@ export const resetPassword = (datas:any) => {
         message,
         showModal, setShowModal,
         password, setPassword,
-        confPassword, setConfPassword}
+        confPassword, setConfPassword
+    }
 }
