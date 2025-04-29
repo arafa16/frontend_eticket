@@ -47,6 +47,14 @@ const viewProject = (props:any) => {
                 </div>
                 <div>
                     <div className="font-medium whitespace-nowrap">
+                        Requestor
+                    </div>
+                    <div className="mt-1 text-slate-500 text-justify">
+                        {datas && datas.user_id !== null ? datas.user && datas.user.name : 'waiting response'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
                         PIC
                     </div>
                     <div className="mt-1 text-slate-500 text-justify">

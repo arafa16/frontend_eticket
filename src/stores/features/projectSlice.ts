@@ -98,11 +98,13 @@ export const createData: any = createAsyncThunk("project/createData", async(data
 
 export const updateData: any = createAsyncThunk("project/updateData", async(datas:any, thunkAPI) => {
     try {
-        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/project/${datas.uuid}`,{
+        const response = await axios.patch(import.meta.env.VITE_REACT_APP_API_URL+`/project/data/${datas.uuid}`,{
+            name:datas.name,
             user_uuid:datas.user_uuid,
             executor_uuid:datas.executor_uuid, 
             description:datas.description, 
-            type_project_uuid:datas.type_project_uuid
+            project_type_uuid:datas.project_type_uuid,
+            target_date:datas.target_date
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });

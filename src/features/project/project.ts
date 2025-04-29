@@ -72,11 +72,11 @@ export const updateDatas = (datas:any) => {
         if(isSuccess && message){
             if(!isLoading){
                 dispatch(resetData());
-                // if(datas.link_navigate !== null && datas.link_navigate !== undefined){
-                //     navigate(datas.link_navigate + message.data.uuid);
-                // }else{
-                //     navigate(-1)
-                // }
+                if(datas.link_navigate !== null && datas.link_navigate !== undefined){
+                    navigate(datas.link_navigate + message.data.uuid);
+                }else{
+                    navigate(-1)
+                }
             }
         }
     },[isSuccess, message, isLoading])
@@ -91,16 +91,10 @@ export const updateDatas = (datas:any) => {
 
     const submit = (e:any) => {
         e.preventDefault()
-        dispatch(updateData({
-            uuid:datas.uuid,
-            user_uuid:datas.user_uuid,
-            executor_uuid:datas.executor_uuid, 
-            description:datas.description, 
-            type_project_uuid:datas.type_project_uuid,
-        }))
+        dispatch(updateData(datas))
     }
 
-    return {submit}
+    return {isLoading, submit}
 }
 
 export const updateStatusDatas = (datas:any) => {

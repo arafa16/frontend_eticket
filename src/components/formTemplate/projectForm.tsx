@@ -9,8 +9,6 @@ const projectForm = (props:any) => {
         executors,
         executor_uuid, set_executor_uuid,
         description, set_description,
-        project_status_select,
-        project_status_uuid, set_project_status_uuid,
         project_type_select,
         project_type_uuid, set_project_type_uuid,
         target_date, set_target_date,
@@ -91,25 +89,6 @@ const projectForm = (props:any) => {
                             />
                         </div>
                     </div>
-                    {/* <div> 
-                        <div className="font-medium whitespace-nowrap">
-                            Project Status
-                        </div>
-                        <div className="mt-1 text-sm text-slate-500 pr-6">
-                            <FormSelect
-                                formSelectSize="sm"
-                                aria-label=".form-select-sm example"
-                                name='project_status_uuid'
-                                value={project_status_uuid}
-                                onChange={(e:any)=>set_project_status_uuid(e.target.value)}
-                                >
-                                    <option value={''}></option>
-                                    {project_status_select.map((data:any, index:any)=>(
-                                        <option key={index} value={data.uuid}>{data.name}</option>
-                                    ))}
-                            </FormSelect>
-                        </div>
-                    </div> */}
                     <div>
                         <div className="font-medium whitespace-nowrap">
                             Project Type
