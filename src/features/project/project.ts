@@ -365,11 +365,11 @@ export const deleteDatas = (datas:any) => {
         if(isSuccess && message){
             if(!isLoading){
                 dispatch(resetData());
-                // if(datas.link_navigate !== null && datas.link_navigate !== undefined){
-                //     navigate(datas.link_navigate + message.data.uuid);
-                // }else{
-                //     navigate(-1)
-                // }
+                if(datas.link_navigate !== null && datas.link_navigate !== undefined){
+                    navigate(datas.link_navigate + message.data.uuid);
+                }else{
+                    navigate(-1)
+                }
             }
         }
     },[isSuccess, message, isLoading])
