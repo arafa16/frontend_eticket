@@ -26,21 +26,47 @@ const initialState: SideMenuState = {
     },
     {
       icon: "Ticket",
-      pathname: "/ticket/data",
       title: "Ticket",
-      privilege: "ticket_requestor",
+      privilege: "ticket",
+      subMenu:[
+        {
+          icon: "Ticket",
+          pathname: "/ticket/data",
+          title: "Ticket",
+          privilege: "ticket_requestor",
+        },
+        {
+          icon: "Ticket",
+          pathname: "/ticket/pic",
+          title: "Ticket For PIC",
+          privilege: "ticket_executor",
+        },
+        {
+          icon: "Ticket",
+          pathname: "/ticket/admin/data",
+          title: "Data Ticket",
+          privilege: "admin",
+        },
+      ]
     },
     {
       icon: "Ticket",
-      pathname: "/ticket/pic",
-      title: "Ticket For PIC",
-      privilege: "ticket_executor",
-    },
-    {
-      icon: "Ticket",
-      pathname: "/ticket/admin/data",
-      title: "Data Ticket",
-      privilege: "admin",
+      title: "Project",
+      privilege: "project",
+      subMenu:[
+        {
+          icon: "Ticket",
+          pathname: "/project/admin/data",
+          title: "Data Project",
+          privilege: "project_administrator",
+        },
+        {
+          icon: "Ticket",
+          pathname: "/project/pic/data",
+          title: "Project By PIC",
+          privilege: "project_executor",
+        }
+      ]
     },
     {
       icon: "User",
@@ -86,6 +112,18 @@ const initialState: SideMenuState = {
           icon: "Bookmark",
           pathname: "/typeTicket/data",
           title: "Type Ticket",
+          privilege: "entity",
+        },
+        {
+          icon: "Bookmark",
+          pathname: "/projectType/data",
+          title: "Project Type",
+          privilege: "entity",
+        },
+        {
+          icon: "Bookmark",
+          pathname: "/projectStatus/data",
+          title: "Project Status",
           privilege: "entity",
         }
       ]

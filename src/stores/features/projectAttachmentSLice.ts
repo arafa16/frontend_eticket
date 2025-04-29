@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import fileDownload from "js-file-download";
 
 interface variabel {
     data: any;
@@ -17,9 +18,9 @@ const initialState : variabel = {
     message: '',
 }
 
-export const uploadAttachment: any = createAsyncThunk("file/uploadAttachment", async(datas : any, thunkAPI) => {
+export const uploadAttachment: any = createAsyncThunk("project/uploadAttachment", async(datas : any, thunkAPI) => {
     try {
-        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/attachment_ticket/${datas.uuid}`, datas.formData,{
+        const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+`/project_attachment/data/${datas.uuid}`, datas.formData,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         
@@ -31,13 +32,12 @@ export const uploadAttachment: any = createAsyncThunk("file/uploadAttachment", a
     }
 });
 
-export const deleteAttachment: any = createAsyncThunk("file/deleteAttachment", async(datas : any, thunkAPI) => {
+export const deleteAttachment: any = createAsyncThunk("project/deleteAttachment", async(datas : any, thunkAPI) => {
     try {
-        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/attachment_ticket/${datas.uuid}`,{
+        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/project_attachment/data/${datas.uuid}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
 
-        console.log(response, 'response')
         return response.data;
     } catch (error: any) {
         if(error.response){
@@ -46,11 +46,21 @@ export const deleteAttachment: any = createAsyncThunk("file/deleteAttachment", a
     }
 });
 
-export const attachmentSlice = createSlice({
-    name: "attachment",
+export const downloadAttachment: any = createAsyncThunk("project/downloadAttachment", async(datas : any, thunkAPI) => {
+
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`${datas.file_link}`,{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+            responseType: 'blob'
+        });
+
+        fileDownload(response.data, `${datas.file_name}`)
+});
+
+export const projectAttachmentSlice = createSlice({
+    name: "project_attachment",
     initialState,
     reducers:{
-        resetAttachment: (state) => initialState
+        resetData: (state) => initialState
     },
     extraReducers:(builder) => {
 
@@ -83,8 +93,9 @@ export const attachmentSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         });
+        
     }
 })
 
-export const {resetAttachment} = attachmentSlice.actions;
-export default attachmentSlice.reducer;
+export const {resetData} = projectAttachmentSlice.actions;
+export default projectAttachmentSlice.reducer;

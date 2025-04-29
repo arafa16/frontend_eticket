@@ -20,6 +20,14 @@ import statusUserReducer from "./features/statusUserSlice";
 import typeTicketReducer from "./features/typeTicketSlice";
 import privilegeReducer from "./features/privilegeSlice";
 import attachmentReducer from "./features/attachmentSlice";
+import projectTypeReducer from "./features/projectTypeSlice";
+import projectStatusReducer from "./features/projectStatusSlice";
+import projectReducer from "./features/projectSlice";
+import project2Reducer from "./features/project2Slice";
+import projectAttachmentReducer from "./features/projectAttachmentSLice";
+import projectNoteReducer from "./features/projectNoteSlice";
+import projectNoteStatusReducer from "./features/projectNoteStatusSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -43,7 +51,14 @@ export const store = configureStore({
     executor:executorReducer,
     statusUser:statusUserReducer,
     privilege:privilegeReducer,
-    attachment:attachmentReducer
+    attachment:attachmentReducer,
+    projectType:projectTypeReducer,
+    projectStatus:projectStatusReducer,
+    project:projectReducer,
+    project2:project2Reducer,
+    projectAttachment:projectAttachmentReducer,
+    projectNote:projectNoteReducer,
+    projectNoteStatus:projectNoteStatusReducer,
   },
 });
 

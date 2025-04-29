@@ -32,6 +32,30 @@ const viewPrivilege = (props:any) => {
                 </div>
                 <div>
                     <div className="font-medium whitespace-nowrap">
+                        project
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.project ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
+                        project executor
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.project_executor ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
+                        project administrator
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.project_administrator ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
                         entity
                     </div>
                     <div className="mt-1  text-slate-500">

@@ -63,8 +63,8 @@ const viewTicketPage = () => {
           {viewDataNoteTicket}
         </div>
         <div className='col-span-12 md:col-span-6 xl:col-span-9 2xl:col-span-9 text-xs'>
-        {viewHistory}
-      </div>
+          {viewHistory}
+        </div>
       </div>
       
     </div>

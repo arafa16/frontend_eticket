@@ -142,7 +142,6 @@ export const getDataCountTicket = (datas:any) => {
     },[isSuccess, data, isLoading])
 
     useEffect(()=>{
-        console.log(datas.uuid_user, 'datas')
         if(datas.uuid_user !== undefined){
             const paramsObj : any = {uuid_user:datas.uuid_user};
             const searchParams = new URLSearchParams(paramsObj);

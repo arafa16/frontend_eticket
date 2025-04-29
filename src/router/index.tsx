@@ -14,6 +14,10 @@ import DataTicketPage from "../pages/ticketAll/dataTicketPage";
 import CreateTicketAdminPage from "../pages/ticketAll/createTicketAdminPage";
 import ViewTicketAdminPage from "../pages/ticketAll/viewTicketAdminPage";
 import UpdateTicketAdminPage from "../pages/ticketAll/updateTicketAdminPage";
+import DataProjectAdminPage from "../pages/projectAdmin/dataProjectAdminPage";
+import CreateProjectAdminPage from "../pages/projectAdmin/createProjectAdminPage";
+import ViewProjectAdminPage from "../pages/projectAdmin/viewProjectAdminPage";
+import UpdateProjectAdminPage from "../pages/projectAdmin/updateProjectAdminPage";
 import ViewDataUser from "../pages/user/viewDataUserPage";
 import ViewUserLoginPage from "../pages/user/viewUserLoginPage";
 import EditUserLoginPage from "../pages/user/editUserLoginPage";
@@ -38,6 +42,13 @@ import DataTypeTicketPage from "../pages/typeTicket/dataTypeTicketPage";
 import CreateTypeTicketPage from "../pages/typeTicket/createTypeTicketPage";
 import UpdateTypeTicketPage from "../pages/typeTicket/updateTypeTicketPage";
 import EditPrivilegeById from "../pages/privilege/editPrivilegeById";
+import DataProjectTypePage from "../pages/projectType/dataProjectTypePage";
+import CreateProjectTypePage from "../pages/projectType/createProjectTypePage";
+import UpdateProjectTypePage from "../pages/projectType/updateProjectTypePage";
+import DataProjectStatusPage from "../pages/projectStatus/dataProjectStatusPage";
+import CreateProjectStatusPage from "../pages/projectStatus/createProjectStatusPage";
+import UpdateProjectStatusPage from "../pages/projectStatus/updateProjectStatusPage";
+import ProjectTablePicPage from "../pages/projectPic/projectTablePicPage";
 
 function Router() {
   const routes = [
@@ -84,6 +95,54 @@ function Router() {
         {
           path: "/ticket/admin/edit/:id",
           element: <UpdateTicketAdminPage />,
+        },
+        //project
+        {
+          path: "/project/admin/data",
+          element: <DataProjectAdminPage />,
+        },
+        {
+          path: "/project/admin/create",
+          element: <CreateProjectAdminPage />,
+        },
+        {
+          path: "/project/admin/data/:id",
+          element: <ViewProjectAdminPage />,
+        },
+        {
+          path: "/project/admin/edit/:id",
+          element: <UpdateProjectAdminPage />,
+        },
+        //project
+        {
+          path: "/project/pic/data",
+          element: <ProjectTablePicPage />,
+        },
+        //project type
+        {
+          path: "/projectType/data",
+          element: <DataProjectTypePage />,
+        },
+        {
+          path: "/projectType/create",
+          element: <CreateProjectTypePage />,
+        },
+        {
+          path: "/projectType/update/:id",
+          element: <UpdateProjectTypePage />,
+        },
+        //project status
+        {
+          path: "/projectStatus/data",
+          element: <DataProjectStatusPage />,
+        },
+        {
+          path: "/projectStatus/create",
+          element: <CreateProjectStatusPage />,
+        },
+        {
+          path: "/projectStatus/update/:id",
+          element: <UpdateProjectStatusPage />,
         },
         {
           path: "/user/data/",

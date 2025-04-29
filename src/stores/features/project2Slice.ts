@@ -17,9 +17,9 @@ const initialState : variabel = {
     message: '',
 }
 
-export const deleteTicket: any = createAsyncThunk("ticket/deleteTicket", async(datas:any, thunkAPI) => {
+export const deleteData: any = createAsyncThunk("project/deleteData", async(datas:any, thunkAPI) => {
     try {
-        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/ticket/${datas.uuid}`,{
+        const response = await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+`/project/${datas.uuid}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
@@ -30,9 +30,9 @@ export const deleteTicket: any = createAsyncThunk("ticket/deleteTicket", async(d
     }
 });
 
-export const GetCountTicket: any = createAsyncThunk("ticket/GetCountTicket", async(datas:any, thunkAPI) => {
+export const getCountData: any = createAsyncThunk("project/getCountData", async(datas:any, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/ticket/count?${datas}`,{
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+`/project/count?${datas}`,{
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
 
@@ -45,39 +45,39 @@ export const GetCountTicket: any = createAsyncThunk("ticket/GetCountTicket", asy
 });
 
 
-export const ticket2Slice = createSlice({
-    name: "ticket2",
+export const project2Slice = createSlice({
+    name: "project2",
     initialState,
     reducers:{
-        resetTicket2: (state) => initialState
+        resetData2: (state) => initialState
     },
     extraReducers:(builder) => {
 
-        //update status ticket
-        builder.addCase(deleteTicket.pending, (state) => {
+        //update status project
+        builder.addCase(deleteData.pending, (state) => {
             state.isLoading = true;
         });
-        builder.addCase(deleteTicket.fulfilled, (state, action) => {
+        builder.addCase(deleteData.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             state.message = action.payload;
         });
-        builder.addCase(deleteTicket.rejected, (state, action) => {
+        builder.addCase(deleteData.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
         });
 
         //get count
-        builder.addCase(GetCountTicket.pending, (state) => {
+        builder.addCase(getCountData.pending, (state) => {
             state.isLoading = true;
         });
-        builder.addCase(GetCountTicket.fulfilled, (state, action) => {
+        builder.addCase(getCountData.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             state.data = action.payload;
         });
-        builder.addCase(GetCountTicket.rejected, (state, action) => {
+        builder.addCase(getCountData.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
@@ -85,5 +85,5 @@ export const ticket2Slice = createSlice({
     }
 })
 
-export const {resetTicket2} = ticket2Slice.actions;
-export default ticket2Slice.reducer;
+export const {resetData2} = project2Slice.actions;
+export default project2Slice.reducer;

@@ -9,6 +9,9 @@ const editPrivilegeById = () => {
     const [dashboard, set_dashboard] = useState(0);
     const [ticket_requestor, set_ticket_requestor] = useState(0);
     const [ticket_executor, set_ticket_executor] = useState(0);
+    const [project, set_project] = useState(0);
+    const [project_executor, set_project_executor] = useState(0);
+    const [project_administrator, set_project_administrator] = useState(0);
     const [entity, set_entity] = useState(0);
     const [admin, set_admin] = useState(0);
 
@@ -24,6 +27,9 @@ const editPrivilegeById = () => {
         set_dashboard(datas.dashboard ? 1 : 0);
         set_ticket_requestor(datas.ticket_requestor ? 1 : 0);
         set_ticket_executor(datas.ticket_executor ? 1 : 0);
+        set_project(datas.project ? 1 : 0);
+        set_project_executor(datas.project_executor ? 1 : 0);
+        set_project_administrator(datas.project_administrator ? 1 : 0);
         set_entity(datas.entity ? 1 : 0);
         set_admin(datas.admin ? 1 : 0);
     }
@@ -35,6 +41,9 @@ const editPrivilegeById = () => {
         dashboard:dashboard,
         ticket_requestor:ticket_requestor,
         ticket_executor:ticket_executor,
+        project:project,
+        project_executor:project_executor,
+        project_administrator:project_administrator,
         entity:entity,
         admin:admin,
     });
@@ -57,6 +66,12 @@ const editPrivilegeById = () => {
                     set_ticket_requestor={set_ticket_requestor}
                     ticket_executor={ticket_executor}
                     set_ticket_executor={set_ticket_executor}
+                    project={project} 
+                    set_project={set_project}
+                    project_executor={project_executor}
+                    set_project_executor={set_project_executor}
+                    project_administrator={project_administrator}
+                    set_project_administrator={set_project_administrator}
                     entity={entity}
                     set_entity={set_entity}
                     admin={admin}
