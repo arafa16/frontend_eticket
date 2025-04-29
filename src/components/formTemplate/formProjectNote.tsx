@@ -17,7 +17,7 @@ const formProjectNote = (props:any) => {
         createAction
     } = props;
     const [description, setDescription] = useState('');
-    const [project_status_note_uuid, set_project_status_note_uuid] = useState('');
+    const [project_note_status_uuid, set_project_note_status_uuid] = useState('');
 
     const submitNoteTicket = (e:any) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ const formProjectNote = (props:any) => {
             user_uuid:user.uuid,
             project_uuid:project.uuid,
             description,
-            project_status_note_uuid
+            project_note_status_uuid
         })
     }
     
@@ -76,8 +76,8 @@ const formProjectNote = (props:any) => {
                                     formSelectSize="sm"
                                     aria-label=".form-select-sm example"
                                     name='projectStatusNote'
-                                    value={project_status_note_uuid}
-                                    onChange={(e)=>set_project_status_note_uuid(e.target.value)}
+                                    value={project_note_status_uuid}
+                                    onChange={(e)=>set_project_note_status_uuid(e.target.value)}
                                     >
                                     <option></option>
                                     {projectStatusNote && projectStatusNote.map((data:any, index:any)=>(
