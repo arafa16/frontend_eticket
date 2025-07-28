@@ -69,6 +69,31 @@ const initialState: SideMenuState = {
       ]
     },
     {
+      icon: "Car",
+      title: "Car Reservation",
+      privilege: "car_reservation",
+      subMenu:[
+        {
+          icon: "Car",
+          pathname: "/carReservation/data",
+          title: "Car Reservation",
+          privilege: "car_reservation_user",
+        },
+        {
+          icon: "Car",
+          pathname: "/carReservation/driver/data",
+          title: "Car Reservation Driver",
+          privilege: "car_reservation_driver",
+        },
+        {
+          icon: "Car",
+          pathname: "/carReservation/admin/data",
+          title: "Car Reservation Admin",
+          privilege: "car_reservation_admin",
+        },
+      ]
+    },
+    {
       icon: "User",
       pathname: "/user/data",
       title: "User",

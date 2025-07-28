@@ -41,6 +41,10 @@ export const updatePrivilege: any = createAsyncThunk("privilege/updatePrivilege"
             project:datas.project,
             project_executor:datas.project_executor,
             project_administrator:datas.project_administrator,
+            car_reservation:datas.car_reservation,
+            car_reservation_user:datas.car_reservation_user,
+            car_reservation_driver:datas.car_reservation_driver,
+            car_reservation_admin:datas.car_reservation_admin,
             entity:datas.entity,
             admin:datas.admin
         },{

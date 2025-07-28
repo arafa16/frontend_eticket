@@ -12,6 +12,10 @@ const editPrivilegeById = () => {
     const [project, set_project] = useState(0);
     const [project_executor, set_project_executor] = useState(0);
     const [project_administrator, set_project_administrator] = useState(0);
+    const [car_reservation, set_car_reservation] = useState(0);
+    const [car_reservation_user, set_car_reservation_user] = useState(0);
+    const [car_reservation_driver, set_car_reservation_driver] = useState(0);
+    const [car_reservation_admin, set_car_reservation_admin] = useState(0);
     const [entity, set_entity] = useState(0);
     const [admin, set_admin] = useState(0);
 
@@ -30,6 +34,10 @@ const editPrivilegeById = () => {
         set_project(datas.project ? 1 : 0);
         set_project_executor(datas.project_executor ? 1 : 0);
         set_project_administrator(datas.project_administrator ? 1 : 0);
+        set_car_reservation(datas.car_reservation ? 1 : 0);
+        set_car_reservation_user(datas.car_reservation_user ? 1 : 0);
+        set_car_reservation_driver(datas.car_reservation_driver ? 1 : 0);
+        set_car_reservation_admin(datas.car_reservation_admin ? 1 : 0);
         set_entity(datas.entity ? 1 : 0);
         set_admin(datas.admin ? 1 : 0);
     }
@@ -44,6 +52,10 @@ const editPrivilegeById = () => {
         project:project,
         project_executor:project_executor,
         project_administrator:project_administrator,
+        car_reservation,
+        car_reservation_user,
+        car_reservation_driver,
+        car_reservation_admin,
         entity:entity,
         admin:admin,
     });
@@ -72,6 +84,14 @@ const editPrivilegeById = () => {
                     set_project_executor={set_project_executor}
                     project_administrator={project_administrator}
                     set_project_administrator={set_project_administrator}
+                    car_reservation={car_reservation} 
+                    set_car_reservation={set_car_reservation}
+                    car_reservation_user={car_reservation_user}
+                    set_car_reservation_user={set_car_reservation_user}
+                    car_reservation_driver={car_reservation_driver}
+                    set_car_reservation_driver={set_car_reservation_driver}
+                    car_reservation_admin={car_reservation_admin}
+                    set_car_reservation_admin={set_car_reservation_admin}
                     entity={entity}
                     set_entity={set_entity}
                     admin={admin}

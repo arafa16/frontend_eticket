@@ -27,6 +27,9 @@ import project2Reducer from "./features/project2Slice";
 import projectAttachmentReducer from "./features/projectAttachmentSLice";
 import projectNoteReducer from "./features/projectNoteSlice";
 import projectNoteStatusReducer from "./features/projectNoteStatusSlice";
+import carReservationReducer from "./features/carReservationSlice";
+import carReservationStatusReducer from "./features/carReservationStatusSlice";
+
 
 
 export const store = configureStore({
@@ -59,6 +62,8 @@ export const store = configureStore({
     projectAttachment:projectAttachmentReducer,
     projectNote:projectNoteReducer,
     projectNoteStatus:projectNoteStatusReducer,
+    carReservation:carReservationReducer,
+    carReservationStatus:carReservationStatusReducer,
   },
 });
 

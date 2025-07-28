@@ -48,10 +48,34 @@ const viewPrivilege = (props:any) => {
                 </div>
                 <div>
                     <div className="font-medium whitespace-nowrap">
-                        project administrator
+                        car reservation
                     </div>
                     <div className="mt-1  text-slate-500">
-                        {data && data.project_administrator ? 'on' : 'off'}
+                        {data && data.car_reservation ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
+                        car reservation user
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.car_reservation_user ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
+                        car reservation driver
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.car_reservation_driver ? 'on' : 'off'}
+                    </div>
+                </div>
+                <div>
+                    <div className="font-medium whitespace-nowrap">
+                        car reservation admin
+                    </div>
+                    <div className="mt-1  text-slate-500">
+                        {data && data.car_reservation_admin ? 'on' : 'off'}
                     </div>
                 </div>
                 <div>

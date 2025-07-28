@@ -55,6 +55,7 @@ const createUserPage = () => {
                     setIsExecutor={setIsExecutor}
                     password={password}
                     setPassword={setPassword}
+                    viewStatus={true}
                     viewPassword={true}
                     submit={createUser}
                 />
