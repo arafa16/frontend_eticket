@@ -3,7 +3,6 @@ import { FormInput, FormSelect } from '../../base-components/Form'
 
 const FormPrivilege = (props:any) => {
 
-    console.log(props, 'props')
     const {
         dashboard, set_dashboard,
         ticket_requestor, set_ticket_requestor,
@@ -11,6 +10,10 @@ const FormPrivilege = (props:any) => {
         project, set_project,
         project_executor, set_project_executor,
         project_administrator, set_project_administrator,
+        car_reservation, set_car_reservation,
+        car_reservation_user, set_car_reservation_user,
+        car_reservation_driver, set_car_reservation_driver,
+        car_reservation_admin, set_car_reservation_admin,
         entity, set_entity,
         admin, set_admin,
         submit
@@ -117,7 +120,7 @@ const FormPrivilege = (props:any) => {
                     </div>
                     <div>
                         <div className="font-medium whitespace-nowrap">
-                        project_administrator
+                        project administrator
                         </div>
                         <div className="mt-1 text-sm text-slate-500 pr-6">
                             <FormSelect
@@ -126,6 +129,82 @@ const FormPrivilege = (props:any) => {
                                 name='project_administrator'
                                 value={project_administrator}
                                 onChange={(e:any)=>set_project_administrator(e.target.value)}
+                                >
+                                    <option></option>
+                                    <option value={0}>off</option>
+                                    <option value={1}>on</option>
+                                    
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                        Car Reservation
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='car_reservation'
+                                value={car_reservation}
+                                onChange={(e:any)=>set_car_reservation(e.target.value)}
+                                >
+                                    <option></option>
+                                    <option value={0}>off</option>
+                                    <option value={1}>on</option>
+                                    
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                        car reservation user
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='car_reservation_user'
+                                value={car_reservation_user}
+                                onChange={(e:any)=>set_car_reservation_user(e.target.value)}
+                                >
+                                    <option></option>
+                                    <option value={0}>off</option>
+                                    <option value={1}>on</option>
+                                    
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                        car reservation driver
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='car_reservation_driver'
+                                value={car_reservation_driver}
+                                onChange={(e:any)=>set_car_reservation_driver(e.target.value)}
+                                >
+                                    <option></option>
+                                    <option value={0}>off</option>
+                                    <option value={1}>on</option>
+                                    
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="font-medium whitespace-nowrap">
+                        car reservation admin
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='car_reservation_admin'
+                                value={car_reservation_admin}
+                                onChange={(e:any)=>set_car_reservation_admin(e.target.value)}
                                 >
                                     <option></option>
                                     <option value={0}>off</option>
