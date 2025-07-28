@@ -50,6 +50,13 @@ import CreateProjectStatusPage from "../pages/projectStatus/createProjectStatusP
 import UpdateProjectStatusPage from "../pages/projectStatus/updateProjectStatusPage";
 import ProjectTablePicPage from "../pages/projectPic/projectTablePicPage";
 
+import CarReservationPage from "../pages/carReservation/carReservationPage";
+import CarReservationByUserPage from "../pages/carReservation/carReservationByUserPage";
+import CarReservationByDriverPage from "../pages/carReservation/carReservationByDriverPage";
+import CarReservationViewPage from "../pages/carReservation/carReservationViewPage";
+import CarReservationFormUserPage from "../pages/carReservation/carReservationFormUserPage";
+
+
 function Router() {
   const routes = [
     {
@@ -113,10 +120,31 @@ function Router() {
           path: "/project/admin/edit/:id",
           element: <UpdateProjectAdminPage />,
         },
-        //project
+        //project PIC
         {
           path: "/project/pic/data",
           element: <ProjectTablePicPage />,
+        },
+        //car reservation
+        {
+          path: "/carReservation/data",
+          element: <CarReservationByUserPage />,
+        },
+        {
+          path: "/carReservation/driver/data",
+          element: <CarReservationByDriverPage />,
+        },
+        {
+          path: "/carReservation/admin/data",
+          element: <CarReservationPage />,
+        },
+        {
+          path: "/carReservation/data/:id",
+          element: <CarReservationViewPage />,
+        },
+        {
+          path: "/carReservation/create",
+          element: <CarReservationFormUserPage />,
         },
         //project type
         {
