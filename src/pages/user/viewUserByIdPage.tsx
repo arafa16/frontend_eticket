@@ -71,6 +71,7 @@ const viewUserByIdPage = () => {
             <div className='mt-2'>
                 <ViewUser 
                     data={dataResult}
+                    is_driver={true}
                     is_executor={true}
                     is_delete={true}
                 />

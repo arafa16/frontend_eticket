@@ -84,6 +84,7 @@ export const updateUser: any = createAsyncThunk("user/updateUser", async(datas :
             devisi_uuid:datas.devisi_uuid, 
             penempatan_uuid:datas.penempatan_uuid, 
             status_user_uuid:datas.status_user_uuid,
+            is_driver:datas.is_driver,
             is_executor:datas.is_executor,
             is_delete:datas.is_delete
         },{
@@ -108,6 +109,7 @@ export const createUser: any = createAsyncThunk("user/createUser", async(datas :
             devisi_uuid:datas.devisi_uuid, 
             penempatan_uuid:datas.penempatan_uuid, 
             status_user_uuid:datas.status_user_uuid,
+            is_driver:datas.is_driver,
             is_executor:datas.is_executor,
             is_delete:datas.is_delete
         },{

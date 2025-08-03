@@ -13,10 +13,12 @@ const FormUser = (props:any) => {
         nomorHp, setNomorHp,
         statusUserId, setStatusUserId,
         isExecutor, setIsExecutor,
+        isDriver, setIsDriver,
         password, setPassword,
         viewPassword,
         viewStatus,
         viewExecutor,
+        viewDriver,
         submit
     } = props;
 
@@ -162,6 +164,24 @@ const FormUser = (props:any) => {
                                 name='isExecutor'
                                 value={isExecutor}
                                 onChange={(e:any)=>setIsExecutor(e.target.value)}
+                                >
+                                    <option></option>
+                                    <option value={0}>non active</option>
+                                    <option value={1}>active</option>
+                            </FormSelect>
+                        </div>
+                    </div>
+                    <div className={`${viewDriver !== true ? 'hidden' : ''}`}>
+                        <div className="font-medium whitespace-nowrap">
+                            Is Driver
+                        </div>
+                        <div className="mt-1 text-sm text-slate-500 pr-6">
+                            <FormSelect
+                                formSelectSize="sm"
+                                aria-label=".form-select-sm example"
+                                name='isDriver'
+                                value={isDriver}
+                                onChange={(e:any)=>setIsDriver(e.target.value)}
                                 >
                                     <option></option>
                                     <option value={0}>non active</option>

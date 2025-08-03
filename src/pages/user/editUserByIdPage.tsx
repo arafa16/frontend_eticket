@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../base-components/Button';
 import { editUserById, getDataUserById } from '../../features/user/user';
@@ -13,6 +13,7 @@ const editUserByIdPage = () => {
     const [nomorHp, setNomorHp] = useState('');
     const [statusUserId, setStatusUserId] = useState('');
     const [isExecutor, setIsExecutor] = useState(0);
+    const [isDriver, setIsDriver] = useState(0);
     
     const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const editUserByIdPage = () => {
 
     useEffect(()=>{
         if(dataResult !== null){
+            console.log(dataResult, 'data result')
             setDataUser(dataResult);
         }
         
@@ -33,6 +35,7 @@ const editUserByIdPage = () => {
         setNomorHp(datas.nomor_hp);
         setStatusUserId(datas.status_user.uuid);
         setIsExecutor(datas.is_executor ? 1 : 0);
+        setIsDriver(datas.is_driver ? 1 : 0);
     }
 
     const { submit:updateUser } = editUserById({
@@ -43,6 +46,7 @@ const editUserByIdPage = () => {
         penempatan_uuid:penempatanId,
         nomor_hp:nomorHp,
         status_user_uuid:statusUserId,
+        is_driver:isDriver,
         is_executor:isExecutor,
     });
 
@@ -73,9 +77,12 @@ const editUserByIdPage = () => {
                     setStatusUserId={setStatusUserId}
                     isExecutor={isExecutor}
                     setIsExecutor={setIsExecutor}
+                    isDriver={isDriver}
+                    setIsDriver={setIsDriver}
                     viewPassword={false}
                     viewStatus={true}
                     viewExecutor={true}
+                    viewDriver={true}
                     submit={updateUser}
                 />
             </div>

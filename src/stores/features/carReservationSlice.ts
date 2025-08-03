@@ -84,6 +84,7 @@ export const updateCarReservation: any = createAsyncThunk(
   "note/updateCarReservation",
   async (datas: any, thunkAPI) => {
     try {
+      console.log(datas.value, 'data feature')
       const response = await axios.patch(
         import.meta.env.VITE_REACT_APP_API_URL +
           `/car_reservation/data/${datas.uuid}`,

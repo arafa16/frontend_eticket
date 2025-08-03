@@ -12,6 +12,7 @@ const createUserPage = () => {
     const [penempatanId, setPenempatanId] = useState('');
     const [nomorHp, setNomorHp] = useState('');
     const [statusUserId, setStatusUserId] = useState('');
+    const [isDriver, setIsDriver] = useState(0);
     const [isExecutor, setIsExecutor] = useState(0);
 
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ const createUserPage = () => {
         nomor_hp:nomorHp,
         status_user_uuid:statusUserId,
         is_executor:isExecutor,
+        is_driver:isDriver,
         password:password
     });
     
@@ -53,10 +55,14 @@ const createUserPage = () => {
                     setStatusUserId={setStatusUserId}
                     isExecutor={isExecutor}
                     setIsExecutor={setIsExecutor}
+                    isDriver={isDriver}
+                    setIsDriver={setIsDriver}
                     password={password}
                     setPassword={setPassword}
                     viewStatus={true}
                     viewPassword={true}
+                    viewDriver={true}
+                    viewExecutor={true}
                     submit={createUser}
                 />
             </div>

@@ -9,9 +9,11 @@ import {
 } from "../../stores/features/carReservationSlice";
 import { getMeAuth } from "../../features/meAuth";
 import LoadingIcon from "../../base-components/LoadingIcon";
+import { getDataUserSelect } from "../../features/user/user";
 
 const carReservationFormUserPage = () => {
-  const [name, set_name] = useState("");
+  const [users, set_users] = useState([]);
+  const [user_uuid, set_user_uuid] = useState("");
   const [start_location, set_start_location] = useState("");
   const [finish_location, set_finish_location] = useState("");
   const [description, set_description] = useState("");
@@ -40,11 +42,17 @@ const carReservationFormUserPage = () => {
     }
   }, [message, isSuccess, isLoading]);
 
+  const data_users = getDataUserSelect();
+  
+  useEffect(()=>{
+    set_users(data_users?.dataResult);
+  },[data_users]);
+
   //get data auth
   const authData = getMeAuth();
 
   useEffect(() => {
-    set_name(authData.data?.name);
+    set_user_uuid(authData.data?.uuid);
   }, [authData]);
 
   const navigate = useNavigate();
@@ -63,7 +71,7 @@ const carReservationFormUserPage = () => {
     e.preventDefault();
     dispatch(
       createCarReservation({
-        user_uuid: authData.data?.uuid,
+        user_uuid,
         start_location,
         finish_location,
         description,
@@ -88,8 +96,8 @@ const carReservationFormUserPage = () => {
       </div>
       <div className="mt-6">
         <CarReservationForm
-          name={name}
-          set_name={set_name}
+          user_uuid={user_uuid}
+          set_user_uuid={set_user_uuid}
           start_location={start_location}
           set_start_location={set_start_location}
           finish_location={finish_location}
@@ -102,6 +110,10 @@ const carReservationFormUserPage = () => {
           set_end_date={set_end_date}
           cancel={handleCancel}
           submit={handleSubmit}
+          users={users}
+          set_users={set_users}
+          is_disabled={true}
+          is_hide={true}
         />
       </div>
     </div>

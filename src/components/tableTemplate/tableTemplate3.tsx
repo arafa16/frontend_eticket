@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormInput } from '../../base-components/Form'
 import Lucide from '../../base-components/Lucide';
-import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 
@@ -18,7 +17,6 @@ const tableTemplate3 = (props:any) => {
         view
     } = props;
 
-    const navigate = useNavigate();
     return (
         <div>
             <div className="box w-full">

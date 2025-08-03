@@ -51,8 +51,6 @@ const carReservationByUserPage = () => {
       const paramsObj: any = { limit, page, user_uuid:dataUser?.uuid };
       const searchParams = new URLSearchParams(paramsObj);
 
-      console.log(searchParams.toString())
-
       dispatch(getCarReservationTable(searchParams));
     }
   }, [limit, page, dataUser]);

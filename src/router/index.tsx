@@ -55,6 +55,7 @@ import CarReservationByUserPage from "../pages/carReservation/carReservationByUs
 import CarReservationByDriverPage from "../pages/carReservation/carReservationByDriverPage";
 import CarReservationViewPage from "../pages/carReservation/carReservationViewPage";
 import CarReservationFormUserPage from "../pages/carReservation/carReservationFormUserPage";
+import CarReservationFormUpdateUserPage from "../pages/carReservation/carReservationFormUpdateUserPage";
 
 
 function Router() {
@@ -145,6 +146,10 @@ function Router() {
         {
           path: "/carReservation/create",
           element: <CarReservationFormUserPage />,
+        },
+        {
+          path: "/carReservation/update/:id",
+          element: <CarReservationFormUpdateUserPage />,
         },
         //project type
         {

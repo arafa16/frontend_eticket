@@ -1,7 +1,7 @@
 import React from 'react'
 
 const viewUser = (props:any) => {
-    const {data, is_executor, is_delete} = props;
+    const {data, is_driver, is_executor, is_delete} = props;
 
     return (
         <div className="w-full box p-8">
@@ -52,6 +52,14 @@ const viewUser = (props:any) => {
                         </div>
                         <div className="mt-1  text-slate-500">
                             {data && data.status_user && data.status_user.name}
+                        </div>
+                    </div>
+                    <div className={`${is_driver !== true ? 'hidden' : ''}`}>
+                        <div className={`font-medium whitespace-nowrap`}>
+                            Is Driver
+                        </div>
+                        <div className="mt-1  text-slate-500">
+                            {data && data.is_driver ? 'yes' : 'no'}
                         </div>
                     </div>
                     <div className={`${is_executor !== true ? 'hidden' : ''}`}>

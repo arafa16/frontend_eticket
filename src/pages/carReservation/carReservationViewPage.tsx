@@ -15,7 +15,7 @@ import {
 import CarReservationStatusTemplate from "../../components/statusTemplate/carReservationStatusTemplate";
 import HistoryTemplate from "../../components/History/historyTemplate";
 import Button from "../../base-components/Button";
-import { update, values } from "lodash";
+import { getMeAuth } from "../../features/meAuth";
 
 const carReservationViewPage = () => {
   const { id } = useParams();
@@ -24,9 +24,13 @@ const carReservationViewPage = () => {
   const [loading, setLoading] = useState(true);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = getMeAuth();
+
+  console.log("user", user?.data.privilege);
 
   const {
     data: dataResult,
@@ -45,16 +49,16 @@ const carReservationViewPage = () => {
     }
   }, [dataResult, isSuccess, isLoading]);
 
-  async function getCarById(id:any) {
+  async function getCarById(id: any) {
     if (id !== undefined || id !== null) {
       await dispatch(getCarReservationById({ uuid: id }));
-    }else{
-      alert('id not found')
+    } else {
+      alert("id not found");
     }
   }
 
   useEffect(() => {
-    getCarById(id)
+    getCarById(id);
   }, [id]);
 
   //status
@@ -80,17 +84,17 @@ const carReservationViewPage = () => {
     dispatch(getCarReservationStatusDatas());
   }, [id]);
 
-  async function updateCarReservationData (uuid:any, value:any) {
-    await dispatch(updateCarReservation({uuid, value}));
+  async function updateCarReservationData(uuid: any, value: any) {
+    await dispatch(updateCarReservation({ uuid, value }));
     await getCarById(uuid);
   }
 
-  const handleChangeStatus = async (uuid:any, sequence:string) => {
+  const handleChangeStatus = async (uuid: any, sequence: string) => {
     let data_update = {
-      sequence:sequence
-    }
+      sequence: sequence,
+    };
 
-    await updateCarReservationData(uuid, data_update)
+    await updateCarReservationData(uuid, data_update);
   };
 
   const handleBack = () => {
@@ -98,10 +102,22 @@ const carReservationViewPage = () => {
 
     if (linkBackParam !== null) {
       navigate(linkBackParam.toString());
-    }else{
-      navigate('/carReservation/data')
+    } else {
+      navigate("/carReservation/data");
     }
   };
+
+  function handleEdit() {
+    const linkBackParam = searchParams.get("link_back");
+
+    if (linkBackParam !== null) {
+      navigate(
+        `/carReservation/update/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`
+      );
+    } else {
+      navigate("/carReservation/data");
+    }
+  }
 
   return (
     <div>
@@ -115,62 +131,108 @@ const carReservationViewPage = () => {
           >
             Back
           </Button>
-          
+          <Button
+            variant="primary"
+            size="sm"
+            className={`px-4 ${
+              user?.data?.privilege?.car_reservation_user === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleEdit()}
+          >
+            Edit
+          </Button>
         </div>
         <div className="flex justify-end gap-x-4">
           <Button
             variant="secondary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence !== 7 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "7" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence !== 7 &&
+              user?.data?.privilege?.car_reservation_user === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "7")}
           >
             Cancel
           </Button>
           <Button
             variant="secondary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 7 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "1" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 7 &&
+              user?.data?.privilege?.car_reservation_user === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "1")}
           >
             Set to draft
           </Button>
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 1 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "2" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 1 &&
+              user?.data?.privilege?.car_reservation_user === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "2")}
           >
             Ajukan Reservasi
           </Button>
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 2 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "3" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 2 &&
+              user?.data?.privilege?.car_reservation_admin === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "3")}
           >
             Konfirmasi Pengajuan
           </Button>
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 3 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "4" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 3 &&
+              user?.data?.privilege?.car_reservation_admin === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "4")}
           >
             Selesai Penjadwalan
           </Button>
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 4 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "5" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 4 &&
+              user?.data?.privilege?.car_reservation_driver === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "5")}
           >
             On Drive
           </Button>
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${data?.car_reservation_status?.sequence === 5 ? '' : 'hidden'}`}
-            onClick={() => handleChangeStatus(id, "6" )}
+            className={`px-4 ${
+              data?.car_reservation_status?.sequence === 5 &&
+              user?.data?.privilege?.car_reservation_driver === true
+                ? ""
+                : "hidden"
+            }`}
+            onClick={() => handleChangeStatus(id, "6")}
           >
             Done
           </Button>

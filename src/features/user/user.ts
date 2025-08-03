@@ -132,7 +132,6 @@ export const createDataUser = (datas:any) => {
 
     const submit = (e:any) => {
         e.preventDefault();
-        console.log(datas, 'datas')
         dispatch(createUser(datas));
     }
 
