@@ -29,8 +29,7 @@ import projectNoteReducer from "./features/projectNoteSlice";
 import projectNoteStatusReducer from "./features/projectNoteStatusSlice";
 import carReservationReducer from "./features/carReservationSlice";
 import carReservationStatusReducer from "./features/carReservationStatusSlice";
-
-
+import carReducer from "./features/carSlice";
 
 export const store = configureStore({
   reducer: {
@@ -46,24 +45,25 @@ export const store = configureStore({
     slider: sliderReducer,
     ticket: ticketReducer,
     ticket2: ticket2Reducer,
-    statusTicket:statusTicketReducer,
-    statusTicket2:statusTicket2Reducer,
-    noteTicket:noteTicketReducer,
-    statusNote:statusNoteReducer,
-    typeTicket:typeTicketReducer,
-    executor:executorReducer,
-    statusUser:statusUserReducer,
-    privilege:privilegeReducer,
-    attachment:attachmentReducer,
-    projectType:projectTypeReducer,
-    projectStatus:projectStatusReducer,
-    project:projectReducer,
-    project2:project2Reducer,
-    projectAttachment:projectAttachmentReducer,
-    projectNote:projectNoteReducer,
-    projectNoteStatus:projectNoteStatusReducer,
-    carReservation:carReservationReducer,
-    carReservationStatus:carReservationStatusReducer,
+    statusTicket: statusTicketReducer,
+    statusTicket2: statusTicket2Reducer,
+    noteTicket: noteTicketReducer,
+    statusNote: statusNoteReducer,
+    typeTicket: typeTicketReducer,
+    executor: executorReducer,
+    statusUser: statusUserReducer,
+    privilege: privilegeReducer,
+    attachment: attachmentReducer,
+    projectType: projectTypeReducer,
+    projectStatus: projectStatusReducer,
+    project: projectReducer,
+    project2: project2Reducer,
+    projectAttachment: projectAttachmentReducer,
+    projectNote: projectNoteReducer,
+    projectNoteStatus: projectNoteStatusReducer,
+    carReservation: carReservationReducer,
+    carReservationStatus: carReservationStatusReducer,
+    car: carReducer,
   },
 });
 

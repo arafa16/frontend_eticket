@@ -11,13 +11,16 @@ import {
 import LoadingIcon from "../../base-components/LoadingIcon";
 import { getDataUserSelect } from "../../features/user/user";
 import dayjs from "dayjs";
+import { getSelectCar, resetCar } from "../../stores/features/carSlice";
 
 const carReservationFormUpdateUserPage = () => {
   const { id } = useParams();
 
   const [users, set_users] = useState<any>([]);
   const [drivers, set_drivers] = useState<any>([]);
+  const [cars, set_cars] = useState<any>([]);
   const [user_uuid, set_user_uuid] = useState("");
+  const [car_uuid, set_car_uuid] = useState("");
   const [driver_uuid, set_driver_uuid] = useState("");
   const [start_location, set_start_location] = useState("");
   const [finish_location, set_finish_location] = useState("");
@@ -25,7 +28,7 @@ const carReservationFormUpdateUserPage = () => {
   const [start_date, set_start_date] = useState("");
   const [end_date, set_end_date] = useState("");
   const [loading, set_loading] = useState(false);
-  
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const linkBackParam = searchParams.get("link_back");
@@ -45,7 +48,9 @@ const carReservationFormUpdateUserPage = () => {
       if (!isLoading) {
         const uuid = message.data.uuid;
         dispatch(resetCarReservation());
-        navigate(`/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`);
+        navigate(
+          `/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`
+        );
       }
     }
   }, [message, isSuccess, isLoading, linkBackParam]);
@@ -65,6 +70,7 @@ const carReservationFormUpdateUserPage = () => {
           dayjs(dataResult?.data.end_date).format("YYYY-MM-DD HH:mm:ss")
         );
         set_driver_uuid(dataResult?.data.driver?.uuid);
+        set_car_uuid(dataResult?.data.car?.uuid);
         dispatch(resetCarReservation());
       }
     }
@@ -82,6 +88,27 @@ const carReservationFormUpdateUserPage = () => {
 
   const navigate = useNavigate();
 
+  const {
+    data: dataCar,
+    isError: isErrorCar,
+    isSuccess: isSuccessCar,
+    isLoading: isLoadingCar,
+    message: messageCar,
+  } = useSelector((state: any) => state.car);
+
+  useEffect(() => {
+    if (dataCar && isSuccessCar) {
+      if (!isLoadingCar) {
+        set_cars(dataCar?.data?.rows);
+        dispatch(resetCar());
+      }
+    }
+  }, [dataCar, isSuccessCar, isLoadingCar]);
+
+  useEffect(() => {
+    dispatch(getSelectCar());
+  }, []);
+
   function handleCancel() {
     const linkBackParam = searchParams.get("link_back_update");
 
@@ -94,15 +121,21 @@ const carReservationFormUpdateUserPage = () => {
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    dispatch(updateCarReservation({uuid:id, value:{
-      user_uuid,
-      start_location,
-      finish_location,
-      description,
-      start_date,
-      end_date,
-      driver_uuid,
-    }}));
+    dispatch(
+      updateCarReservation({
+        uuid: id,
+        value: {
+          user_uuid,
+          start_location,
+          finish_location,
+          description,
+          start_date,
+          end_date,
+          car_uuid,
+          driver_uuid,
+        },
+      })
+    );
   }
 
   function filterUserDriver() {
@@ -130,7 +163,7 @@ const carReservationFormUpdateUserPage = () => {
           <LoadingIcon icon="circles" color="gray" />
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 mb-24">
         <CarReservationForm
           user_uuid={user_uuid}
           set_user_uuid={set_user_uuid}
@@ -148,6 +181,9 @@ const carReservationFormUpdateUserPage = () => {
           submit={handleSubmit}
           users={users}
           drivers={drivers}
+          cars={cars}
+          car_uuid={car_uuid}
+          set_car_uuid={set_car_uuid}
           driver_uuid={driver_uuid}
           set_driver_uuid={set_driver_uuid}
           set_users={set_users}

@@ -1,5 +1,9 @@
 import Button from "../../base-components/Button";
-import { FormInput, FormTextarea } from "../../base-components/Form";
+import {
+  FormInput,
+  FormTextarea,
+  FormSelect,
+} from "../../base-components/Form";
 import TomSelect from "../../base-components/TomSelect";
 
 const CarReservationForm = (props: any) => {
@@ -18,6 +22,9 @@ const CarReservationForm = (props: any) => {
     set_end_date,
     driver_uuid,
     set_driver_uuid,
+    car_uuid,
+    set_car_uuid,
+    cars,
     cancel,
     submit,
     users,
@@ -144,6 +151,25 @@ const CarReservationForm = (props: any) => {
                     </option>
                   ))}
               </TomSelect>
+            </div>
+          </div>
+          <div>
+            <div className="font-medium whitespace-nowrap">Mobil</div>
+            <div className="mt-1 text-sm text-slate-500 pr-6">
+              <FormSelect
+                formSelectSize="sm"
+                aria-label=".form-select-sm example"
+                name="car_uuid"
+                value={car_uuid}
+                onChange={(e: any) => set_car_uuid(e.target.value)}
+              >
+                <option value={""}></option>
+                {cars?.map((data: any, index: any) => (
+                  <option key={index} value={data.uuid}>
+                    {data.name}
+                  </option>
+                ))}
+              </FormSelect>
             </div>
           </div>
         </div>
