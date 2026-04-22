@@ -21,7 +21,7 @@ export const getCarSelect = () => {
     isSuccess: isSuccessCar,
     isLoading: isLoadingCar,
     message: messageCar,
-  } = useSelector((state: any) => state.devisi);
+  } = useSelector((state: any) => state.car);
 
   useEffect(() => {
     if (dataCar && isSuccessCar) {
@@ -46,7 +46,7 @@ export const getDataCarById = (datas: any) => {
   const dispatch = useDispatch();
 
   const { data, isError, isSuccess, isLoading, message } = useSelector(
-    (state: any) => state.devisi
+    (state: any) => state.car,
   );
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const getDataCarTable = (datas: any) => {
     isSuccess: isSuccessCar,
     isLoading: isLoadingCar,
     message: messageCar,
-  } = useSelector((state: any) => state.devisi);
+  } = useSelector((state: any) => state.car);
 
   useEffect(() => {
     if (dataCar && isSuccessCar) {
@@ -90,8 +90,14 @@ export const getDataCarTable = (datas: any) => {
         setLoading(false);
         dispatch(resetCar());
       }
+    } else if (isErrorCar && messageCar) {
+      if (!isLoadingCar) {
+        setData([]);
+        setLoading(false);
+        dispatch(resetCar());
+      }
     }
-  }, [dataCar, isSuccessCar, isLoadingCar]);
+  }, [dataCar, isSuccessCar, isLoadingCar, isErrorCar, messageCar]);
 
   useEffect(() => {
     const paramsObj: any = { limit, page };
@@ -146,7 +152,7 @@ export const createDataCar = (datas: any) => {
     isSuccess: isSuccessCar,
     isLoading: isLoadingCar,
     message: messageCar,
-  } = useSelector((state: any) => state.devisi);
+  } = useSelector((state: any) => state.car);
 
   useEffect(() => {
     if (messageCar && isSuccessCar) {
@@ -178,7 +184,7 @@ export const updateDataCar = (datas: any) => {
     isSuccess: isSuccessCar,
     isLoading: isLoadingCar,
     message: messageCar,
-  } = useSelector((state: any) => state.devisi);
+  } = useSelector((state: any) => state.car);
 
   useEffect(() => {
     if (messageCar && isSuccessCar) {

@@ -150,6 +150,12 @@ const initialState: SideMenuState = {
           pathname: "/projectStatus/data",
           title: "Project Status",
           privilege: "entity",
+        },
+        {
+          icon: "Bookmark",
+          pathname: "/car/data",
+          title: "Car",
+          privilege: "entity",
         }
       ]
     },

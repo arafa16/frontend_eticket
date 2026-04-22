@@ -57,6 +57,9 @@ import CarReservationViewPage from "../pages/carReservation/carReservationViewPa
 import CarReservationFormUserPage from "../pages/carReservation/carReservationFormUserPage";
 import CarReservationFormUpdateUserPage from "../pages/carReservation/carReservationFormUpdateUserPage";
 
+import DataCarPage from "../pages/car/dataCarPage";
+import CreateCarPage from "../pages/car/createCarPage";
+import UpdateCarPage from "../pages/car/updateCarPage";
 
 function Router() {
   const routes = [
@@ -273,6 +276,18 @@ function Router() {
         {
           path: "/typeTicket/update/:id",
           element: <UpdateTypeTicketPage />,
+        },
+        {
+          path: "/car/data",
+          element: <DataCarPage />,
+        },
+        {
+          path: "/car/create",
+          element: <CreateCarPage />,
+        },
+        {
+          path: "/car/update/:id",
+          element: <UpdateCarPage />,
         },
       ],
     },

@@ -25,7 +25,7 @@ export const getSelectCar: any = createAsyncThunk(
         import.meta.env.VITE_REACT_APP_API_URL + "/car/data?is_select=true",
         {
           withCredentials: true, // Now this is was the missing piece in the client side
-        }
+        },
       );
 
       return response.data;
@@ -34,7 +34,7 @@ export const getSelectCar: any = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response);
       }
     }
-  }
+  },
 );
 
 export const getCarTable: any = createAsyncThunk(
@@ -45,7 +45,7 @@ export const getCarTable: any = createAsyncThunk(
         import.meta.env.VITE_REACT_APP_API_URL + `/car/data?${datas}`,
         {
           withCredentials: true, // Now this is was the missing piece in the client side
-        }
+        },
       );
 
       return response.data;
@@ -54,7 +54,7 @@ export const getCarTable: any = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response);
       }
     }
-  }
+  },
 );
 
 export const getCarById: any = createAsyncThunk(
@@ -65,7 +65,7 @@ export const getCarById: any = createAsyncThunk(
         import.meta.env.VITE_REACT_APP_API_URL + `/car/data/${datas.uuid}`,
         {
           withCredentials: true, // Now this is was the missing piece in the client side
-        }
+        },
       );
 
       return response.data;
@@ -74,7 +74,7 @@ export const getCarById: any = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response);
       }
     }
-  }
+  },
 );
 
 export const createCar: any = createAsyncThunk(
@@ -91,7 +91,7 @@ export const createCar: any = createAsyncThunk(
         },
         {
           withCredentials: true, // Now this is was the missing piece in the client side
-        }
+        },
       );
 
       console.log(datas, response, "response");
@@ -102,7 +102,7 @@ export const createCar: any = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response);
       }
     }
-  }
+  },
 );
 
 export const updateCar: any = createAsyncThunk(
@@ -119,10 +119,8 @@ export const updateCar: any = createAsyncThunk(
         },
         {
           withCredentials: true, // Now this is was the missing piece in the client side
-        }
+        },
       );
-
-      console.log(datas, response, "response");
 
       return response.data;
     } catch (error: any) {
@@ -130,7 +128,7 @@ export const updateCar: any = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response);
       }
     }
-  }
+  },
 );
 
 export const carSlice = createSlice({
