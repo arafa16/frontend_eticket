@@ -11,12 +11,16 @@ import { getMeAuth } from "../../features/meAuth";
 import LoadingIcon from "../../base-components/LoadingIcon";
 import { getDataUserSelect } from "../../features/user/user";
 import { getVehicleAllocationSelect } from "../../features/vehicleAllocation/vehicleAllocation";
+import { getCarSelect } from "../../features/car/car";
 
 const carReservationFormUserPage = () => {
   const [users, set_users] = useState<any>(null);
-
   const [vehicle_allocations, set_vehicle_allocations] = useState<any>(null);
   const [user_uuid, set_user_uuid] = useState("");
+  const [car_uuid, set_car_uuid] = useState("");
+  const [driver_uuid, set_driver_uuid] = useState("");
+  const [drivers, set_drivers] = useState<any>([]);
+  const [cars, set_cars] = useState<any>([]);
   const [start_location, set_start_location] = useState("");
   const [finish_location, set_finish_location] = useState("");
   const [description, set_description] = useState("");
@@ -48,19 +52,22 @@ const carReservationFormUserPage = () => {
 
   const data_users = getDataUserSelect();
 
+  const data_car_select = getCarSelect();
+
   const data_vehicle_allocation = getVehicleAllocationSelect();
 
   useEffect(() => {
     set_users(data_users?.dataResult);
     set_vehicle_allocations(data_vehicle_allocation?.dataSelect?.rows);
-  }, [data_users, data_vehicle_allocation]);
+    set_cars(data_car_select?.dataSelect?.rows);
+  }, [data_users, data_vehicle_allocation, data_car_select]);
 
   //get data auth
-  const authData = getMeAuth();
+  // const authData = getMeAuth();
 
-  useEffect(() => {
-    set_user_uuid(authData.data?.uuid);
-  }, [authData]);
+  // useEffect(() => {
+  //   set_user_uuid(authData.data?.uuid);
+  // }, [authData]);
 
   const navigate = useNavigate();
 
@@ -84,9 +91,24 @@ const carReservationFormUserPage = () => {
         description,
         start_date,
         end_date,
+        car_uuid,
+        driver_uuid,
+        vehicle_allocation_uuid,
       }),
     );
   }
+
+  function filterUserDriver() {
+    if (users !== null) {
+      const findDriver = users.filter((user: any) => user.is_driver === true);
+
+      set_drivers(findDriver);
+    }
+  }
+
+  useEffect(() => {
+    filterUserDriver();
+  }, [users]);
 
   return (
     <div>
@@ -120,10 +142,16 @@ const carReservationFormUserPage = () => {
           cancel={handleCancel}
           submit={handleSubmit}
           users={users}
+          drivers={drivers}
+          cars={cars}
+          car_uuid={car_uuid}
+          set_car_uuid={set_car_uuid}
+          driver_uuid={driver_uuid}
+          set_driver_uuid={set_driver_uuid}
           vehicle_allocations={vehicle_allocations}
           set_users={set_users}
-          is_disabled={true}
-          is_hide={true}
+          is_disabled={false}
+          is_hide={false}
         />
       </div>
     </div>

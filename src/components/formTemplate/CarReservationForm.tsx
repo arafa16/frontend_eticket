@@ -21,6 +21,8 @@ const CarReservationForm = (props: any) => {
     end_date,
     set_end_date,
     driver_uuid,
+    vehicle_allocation_uuid,
+    set_vehicle_allocation_uuid,
     set_driver_uuid,
     car_uuid,
     set_car_uuid,
@@ -28,6 +30,7 @@ const CarReservationForm = (props: any) => {
     cancel,
     submit,
     users,
+    vehicle_allocations,
     drivers,
     is_disabled,
     is_hide,
@@ -45,7 +48,7 @@ const CarReservationForm = (props: any) => {
                 value={user_uuid}
                 onChange={set_user_uuid}
                 options={{
-                  placeholder: "Select your favorite actors",
+                  placeholder: "Select user",
                 }}
                 className="w-full"
                 disabled={is_disabled}
@@ -129,6 +132,27 @@ const CarReservationForm = (props: any) => {
                 value={end_date}
                 onChange={(e: any) => set_end_date(e.target.value)}
               />
+            </div>
+          </div>
+          <div className={`${is_hide ? "hidden" : ""}`}>
+            <div className="font-medium whitespace-nowrap">
+              Alokasi Kendaraan
+            </div>
+            <div className="mt-1 text-sm text-slate-500 pr-6">
+              <TomSelect
+                value={vehicle_allocation_uuid}
+                onChange={set_vehicle_allocation_uuid}
+                options={{
+                  placeholder: "",
+                }}
+                className="w-full"
+              >
+                {vehicle_allocations?.map((data: any, index: any) => (
+                  <option key={index} value={data.uuid}>
+                    {data.name}
+                  </option>
+                ))}
+              </TomSelect>
             </div>
           </div>
           <div className={`${is_hide ? "hidden" : ""}`}>

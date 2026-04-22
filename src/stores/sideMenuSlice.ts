@@ -22,13 +22,13 @@ const initialState: SideMenuState = {
       icon: "Home",
       title: "Dashboard",
       pathname: "/",
-      privilege: "dashboard"
+      privilege: "dashboard",
     },
     {
       icon: "Ticket",
       title: "Ticket",
       privilege: "ticket",
-      subMenu:[
+      subMenu: [
         {
           icon: "Ticket",
           pathname: "/ticket/data",
@@ -47,13 +47,13 @@ const initialState: SideMenuState = {
           title: "Data Ticket",
           privilege: "admin",
         },
-      ]
+      ],
     },
     {
       icon: "Ticket",
       title: "Project",
       privilege: "project",
-      subMenu:[
+      subMenu: [
         {
           icon: "Ticket",
           pathname: "/project/admin/data",
@@ -65,14 +65,14 @@ const initialState: SideMenuState = {
           pathname: "/project/pic/data",
           title: "Project By PIC",
           privilege: "project_executor",
-        }
-      ]
+        },
+      ],
     },
     {
       icon: "Car",
       title: "Car Reservation",
       privilege: "car_reservation",
-      subMenu:[
+      subMenu: [
         {
           icon: "Car",
           pathname: "/carReservation/data",
@@ -91,7 +91,7 @@ const initialState: SideMenuState = {
           title: "Car Reservation Admin",
           privilege: "car_reservation_admin",
         },
-      ]
+      ],
     },
     {
       icon: "User",
@@ -109,7 +109,7 @@ const initialState: SideMenuState = {
       icon: "Bookmark",
       title: "Entity",
       privilege: "entity",
-      subMenu:[
+      subMenu: [
         {
           icon: "Bookmark",
           pathname: "/devisi/data",
@@ -156,8 +156,14 @@ const initialState: SideMenuState = {
           pathname: "/car/data",
           title: "Car",
           privilege: "entity",
-        }
-      ]
+        },
+        {
+          icon: "Bookmark",
+          pathname: "/vehicleAllocation/data",
+          title: "Vehicle Allocation",
+          privilege: "entity",
+        },
+      ],
     },
   ],
 };

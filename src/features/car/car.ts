@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export const getCarSelect = () => {
   const dispatch = useDispatch();
-  const [dataSelect, setDataSelect] = useState([]);
+  const [dataSelect, setDataSelect] = useState<any>([]);
   const [loadingCar, setLoadingCar] = useState(true);
 
   const {

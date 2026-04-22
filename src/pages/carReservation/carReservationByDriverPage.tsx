@@ -15,6 +15,7 @@ const carReservationByDriverPage = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [allPage, setAllPage] = useState(0);
+  const [search, setSearch] = useState("");
   const [countData, setCountData] = useState(0);
 
   const dispatch = useDispatch();
@@ -23,9 +24,9 @@ const carReservationByDriverPage = () => {
   //get data auth
   const authData = getMeAuth();
 
-  useEffect(()=>{
-    setDataUser(authData.data)
-  },[authData])
+  useEffect(() => {
+    setDataUser(authData.data);
+  }, [authData]);
 
   const {
     data: dataResult,
@@ -47,15 +48,20 @@ const carReservationByDriverPage = () => {
   }, [dataResult, isSuccess, isLoading]);
 
   useEffect(() => {
-    if(dataUser?.uuid !== undefined){
-      const paramsObj: any = { limit, page, driver_uuid:dataUser?.uuid };
+    if (dataUser?.uuid !== undefined) {
+      const paramsObj: any = {
+        limit,
+        page,
+        driver_uuid: dataUser?.uuid,
+        search,
+      };
       const searchParams = new URLSearchParams(paramsObj);
 
-      console.log(searchParams.toString())
+      console.log(searchParams.toString());
 
       dispatch(getCarReservationTable(searchParams));
     }
-  }, [limit, page, dataUser]);
+  }, [limit, page, dataUser, search]);
 
   //table
   const countPage = (allData: any) => {
@@ -77,16 +83,20 @@ const carReservationByDriverPage = () => {
     }
   };
 
-  function handleView(uuid:string) {
-    navigate(`/carReservation/data/${uuid}?link_back=/carReservation/driver/data`)
+  function handleView(uuid: string) {
+    navigate(
+      `/carReservation/data/${uuid}?link_back=/carReservation/driver/data`,
+    );
   }
 
   function handleCreate() {
-    navigate(`/carReservation/create?link_back=/carReservation/driver/data`)
+    navigate(`/carReservation/create?link_back=/carReservation/driver/data`);
   }
 
-  function handleUpdate(uuid:string) {
-    navigate(`/carReservation/update/${uuid}?link_back=/carReservation/driver/data`)
+  function handleUpdate(uuid: string) {
+    navigate(
+      `/carReservation/update/${uuid}?link_back=/carReservation/driver/data`,
+    );
   }
 
   return (
@@ -94,6 +104,8 @@ const carReservationByDriverPage = () => {
       <div className="mt-4">
         <TableTemplate3
           datas={data}
+          search={search}
+          setSearch={setSearch}
           count={countData}
           limit={limit}
           setLimit={setLimit}

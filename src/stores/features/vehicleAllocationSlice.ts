@@ -17,13 +17,13 @@ const initialState: variabel = {
   message: "",
 };
 
-export const getCarReservationTable: any = createAsyncThunk(
-  "note/getCarReservationTable",
-  async (datas: any, thunkAPI) => {
+export const getSelectVehicleAllocation: any = createAsyncThunk(
+  "vehicle_allocation/getSelectVehicleAllocation",
+  async (_, thunkAPI) => {
     try {
       const response = await axios.get(
         import.meta.env.VITE_REACT_APP_API_URL +
-          `/car_reservation/data?${datas}`,
+          "/vehicle_allocation/data?is_select=true",
         {
           withCredentials: true, // Now this is was the missing piece in the client side
         },
@@ -38,13 +38,13 @@ export const getCarReservationTable: any = createAsyncThunk(
   },
 );
 
-export const getCarReservationById: any = createAsyncThunk(
-  "note/getCarReservationById",
+export const getVehicleAllocationTable: any = createAsyncThunk(
+  "vehicle_allocation/getVehicleAllocationTable",
   async (datas: any, thunkAPI) => {
     try {
       const response = await axios.get(
         import.meta.env.VITE_REACT_APP_API_URL +
-          `/car_reservation/data/${datas.uuid}`,
+          `/vehicle_allocation/data?${datas}`,
         {
           withCredentials: true, // Now this is was the missing piece in the client side
         },
@@ -59,17 +59,45 @@ export const getCarReservationById: any = createAsyncThunk(
   },
 );
 
-export const createCarReservation: any = createAsyncThunk(
-  "note/createCarReservation",
+export const getVehicleAllocationById: any = createAsyncThunk(
+  "vehicle_allocation/getVehicleAllocationById",
+  async (datas: any, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        import.meta.env.VITE_REACT_APP_API_URL +
+          `/vehicle_allocation/data/${datas.uuid}`,
+        {
+          withCredentials: true, // Now this is was the missing piece in the client side
+        },
+      );
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response);
+      }
+    }
+  },
+);
+
+export const createVehicleAllocation: any = createAsyncThunk(
+  "vehicle_allocation/createVehicleAllocation",
   async (datas: any, thunkAPI) => {
     try {
       const response = await axios.post(
-        import.meta.env.VITE_REACT_APP_API_URL + `/car_reservation/data`,
-        datas,
+        import.meta.env.VITE_REACT_APP_API_URL + `/vehicle_allocation/data`,
+        {
+          name: datas.name,
+          sequence: datas.sequence,
+          is_select: datas.is_select,
+          is_active: datas.is_active,
+        },
         {
           withCredentials: true, // Now this is was the missing piece in the client side
         },
       );
+
+      console.log(datas, response, "response");
 
       return response.data;
     } catch (error: any) {
@@ -80,15 +108,19 @@ export const createCarReservation: any = createAsyncThunk(
   },
 );
 
-export const updateCarReservation: any = createAsyncThunk(
-  "note/updateCarReservation",
+export const updateVehicleAllocation: any = createAsyncThunk(
+  "vehicle_allocation/updateVehicleAllocation",
   async (datas: any, thunkAPI) => {
     try {
-      console.log(datas.value, "data feature");
       const response = await axios.patch(
         import.meta.env.VITE_REACT_APP_API_URL +
-          `/car_reservation/data/${datas.uuid}`,
-        datas.value,
+          `/vehicle_allocation/data/${datas.uuid}`,
+        {
+          name: datas.name,
+          sequence: datas.sequence,
+          is_select: datas.is_select,
+          is_active: datas.is_active,
+        },
         {
           withCredentials: true, // Now this is was the missing piece in the client side
         },
@@ -103,100 +135,83 @@ export const updateCarReservation: any = createAsyncThunk(
   },
 );
 
-export const deleteCarReservation: any = createAsyncThunk(
-  "note/deleteCarReservation",
-  async (datas: any, thunkAPI) => {
-    try {
-      const response = await axios.delete(
-        import.meta.env.VITE_REACT_APP_API_URL +
-          `/car_reservation/data/${datas.uuid}`,
-        {
-          withCredentials: true, // Now this is was the missing piece in the client side
-        },
-      );
-
-      return response.data;
-    } catch (error: any) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response);
-      }
-    }
-  },
-);
-
-export const carReservationSlice = createSlice({
-  name: "carReservation",
+export const vehicleAllocationSlice = createSlice({
+  name: "vehicle_allocation",
   initialState,
   reducers: {
-    resetCarReservation: (state) => initialState,
+    resetVehicleAllocation: (state) => initialState,
   },
   extraReducers: (builder) => {
-    //by id
-    builder.addCase(getCarReservationById.pending, (state) => {
+    //vehicle_allocation select
+    builder.addCase(getSelectVehicleAllocation.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getCarReservationById.fulfilled, (state, action) => {
+    builder.addCase(getSelectVehicleAllocation.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.data = action.payload;
     });
-    builder.addCase(getCarReservationById.rejected, (state, action) => {
+    builder.addCase(getSelectVehicleAllocation.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     });
 
-    builder.addCase(getCarReservationTable.pending, (state) => {
+    //vehicle_allocation table
+    builder.addCase(getVehicleAllocationTable.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getCarReservationTable.fulfilled, (state, action) => {
+    builder.addCase(getVehicleAllocationTable.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.data = action.payload;
     });
-    builder.addCase(getCarReservationTable.rejected, (state, action) => {
+    builder.addCase(getVehicleAllocationTable.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     });
 
-    builder.addCase(createCarReservation.pending, (state) => {
+    //vehicle_allocation table
+    builder.addCase(getVehicleAllocationById.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(createCarReservation.fulfilled, (state, action) => {
+    builder.addCase(getVehicleAllocationById.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.message = action.payload;
+      state.data = action.payload;
     });
-    builder.addCase(createCarReservation.rejected, (state, action) => {
+    builder.addCase(getVehicleAllocationById.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     });
 
-    builder.addCase(updateCarReservation.pending, (state) => {
+    //create vehicle_allocation
+    builder.addCase(createVehicleAllocation.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(updateCarReservation.fulfilled, (state, action) => {
+    builder.addCase(createVehicleAllocation.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.message = action.payload;
     });
-    builder.addCase(updateCarReservation.rejected, (state, action) => {
+    builder.addCase(createVehicleAllocation.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     });
 
-    builder.addCase(deleteCarReservation.pending, (state) => {
+    //create vehicle_allocation
+    builder.addCase(updateVehicleAllocation.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(deleteCarReservation.fulfilled, (state, action) => {
+    builder.addCase(updateVehicleAllocation.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.message = action.payload;
     });
-    builder.addCase(deleteCarReservation.rejected, (state, action) => {
+    builder.addCase(updateVehicleAllocation.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
@@ -204,5 +219,5 @@ export const carReservationSlice = createSlice({
   },
 });
 
-export const { resetCarReservation } = carReservationSlice.actions;
-export default carReservationSlice.reducer;
+export const { resetVehicleAllocation } = vehicleAllocationSlice.actions;
+export default vehicleAllocationSlice.reducer;

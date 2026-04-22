@@ -55,11 +55,17 @@ import CarReservationByUserPage from "../pages/carReservation/carReservationByUs
 import CarReservationByDriverPage from "../pages/carReservation/carReservationByDriverPage";
 import CarReservationViewPage from "../pages/carReservation/carReservationViewPage";
 import CarReservationFormUserPage from "../pages/carReservation/carReservationFormUserPage";
+import CarReservationFormAdminPage from "../pages/carReservation/carReservationFormAdminPage";
 import CarReservationFormUpdateUserPage from "../pages/carReservation/carReservationFormUpdateUserPage";
+import CarReservationFormUpdateAdminPage from "../pages/carReservation/carReservationFormUpdateAdminPage";
 
 import DataCarPage from "../pages/car/dataCarPage";
 import CreateCarPage from "../pages/car/createCarPage";
 import UpdateCarPage from "../pages/car/updateCarPage";
+
+import DataVehicleAllocationPage from "../pages/vehicleAllocation/dataVehicleAllocationPage";
+import CreateVehicleAllocationPage from "../pages/vehicleAllocation/createVehicleAllocationPage";
+import UpdateVehicleAllocationPage from "../pages/vehicleAllocation/updateVehicleAllocationPage";
 
 function Router() {
   const routes = [
@@ -151,8 +157,16 @@ function Router() {
           element: <CarReservationFormUserPage />,
         },
         {
+          path: "/carReservationAdmin/create",
+          element: <CarReservationFormAdminPage />,
+        },
+        {
           path: "/carReservation/update/:id",
           element: <CarReservationFormUpdateUserPage />,
+        },
+        {
+          path: "/carReservation/update_admin/:id",
+          element: <CarReservationFormUpdateAdminPage />,
         },
         //project type
         {
@@ -288,6 +302,18 @@ function Router() {
         {
           path: "/car/update/:id",
           element: <UpdateCarPage />,
+        },
+        {
+          path: "/vehicleAllocation/data",
+          element: <DataVehicleAllocationPage />,
+        },
+        {
+          path: "/vehicleAllocation/create",
+          element: <CreateVehicleAllocationPage />,
+        },
+        {
+          path: "/vehicleAllocation/update/:id",
+          element: <UpdateVehicleAllocationPage />,
         },
       ],
     },

@@ -49,7 +49,7 @@ const carReservationFormUpdateUserPage = () => {
         const uuid = message.data.uuid;
         dispatch(resetCarReservation());
         navigate(
-          `/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`,
+          `/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`
         );
       }
     }
@@ -64,10 +64,10 @@ const carReservationFormUpdateUserPage = () => {
         set_finish_location(dataResult?.data.finish_location);
         set_description(dataResult?.data.description);
         set_start_date(
-          dayjs(dataResult?.data.start_date).format("YYYY-MM-DD HH:mm:ss"),
+          dayjs(dataResult?.data.start_date).format("YYYY-MM-DD HH:mm:ss")
         );
         set_end_date(
-          dayjs(dataResult?.data.end_date).format("YYYY-MM-DD HH:mm:ss"),
+          dayjs(dataResult?.data.end_date).format("YYYY-MM-DD HH:mm:ss")
         );
         set_driver_uuid(dataResult?.data.driver?.uuid);
         set_car_uuid(dataResult?.data.car?.uuid);
@@ -134,7 +134,7 @@ const carReservationFormUpdateUserPage = () => {
           car_uuid,
           driver_uuid,
         },
-      }),
+      })
     );
   }
 
@@ -187,8 +187,8 @@ const carReservationFormUpdateUserPage = () => {
           driver_uuid={driver_uuid}
           set_driver_uuid={set_driver_uuid}
           set_users={set_users}
-          is_disabled={true}
-          is_hide={true}
+          is_disabled={false}
+          is_hide={false}
         />
       </div>
     </div>
