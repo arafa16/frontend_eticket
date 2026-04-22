@@ -68,7 +68,7 @@ const carReservationPage = () => {
 
   function handleView(uuid: string) {
     navigate(
-      `/carReservationAdmin/data/${uuid}?link_back=/carReservation/admin/data`,
+      `/carReservation/data/${uuid}?link_back=/carReservation/admin/data`,
     );
   }
 

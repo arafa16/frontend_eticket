@@ -16,6 +16,8 @@ import CarReservationStatusTemplate from "../../components/statusTemplate/carRes
 import HistoryTemplate from "../../components/History/historyTemplate";
 import Button from "../../base-components/Button";
 import { getMeAuth } from "../../features/meAuth";
+import UploadAttachment from "../../components/formTemplate/uploadAttachment";
+import { uploadDataAttachment } from "../../features/attachment/uploadCarReservationAttachment";
 
 const carReservationViewPage = () => {
   const { id } = useParams();
@@ -54,6 +56,8 @@ const carReservationViewPage = () => {
       alert("id not found");
     }
   }
+
+  console.log(data, "result");
 
   useEffect(() => {
     getCarById(id);
@@ -119,8 +123,20 @@ const carReservationViewPage = () => {
     }
   }
 
+  const reload = () => {
+    dispatch(getCarReservationById({ uuid: id }));
+  };
+
+  const {
+    modal: modalAttachment,
+    deleteFileAttachment,
+    showModal,
+    setShowModal,
+  } = uploadDataAttachment({ uuid: id, reload });
+
   return (
     <div>
+      {modalAttachment}
       <div className="mt-6 flex justify-between">
         <div className="flex justify-start gap-x-2">
           <Button
@@ -242,6 +258,13 @@ const carReservationViewPage = () => {
         <CarReservationStatusTemplate
           datas={dataStatus}
           status_uuid={data?.car_reservation_status?.uuid}
+        />
+      </div>
+      <div className="w-full flex justify-end my-4">
+        <UploadAttachment
+          datas={data?.car_reservation_attachments}
+          deleteFile={deleteFileAttachment}
+          setShowModal={setShowModal}
         />
       </div>
       <div className="mt-4">
