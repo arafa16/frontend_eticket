@@ -30,8 +30,6 @@ const carReservationViewPage = () => {
 
   const user = getMeAuth();
 
-  console.log("user", user?.data.privilege);
-
   const {
     data: dataResult,
     isError,
@@ -112,10 +110,12 @@ const carReservationViewPage = () => {
 
     if (linkBackParam !== null) {
       navigate(
-        `/carReservation/update/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`
+        `/carReservation/update/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`,
       );
     } else {
-      navigate("/carReservation/data");
+      navigate(
+        `/carReservation/update/${id}?link_back=/carReservation/data/${id}`,
+      );
     }
   }
 

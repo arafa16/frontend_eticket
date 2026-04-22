@@ -12,7 +12,7 @@ import LoadingIcon from "../../base-components/LoadingIcon";
 import { getDataUserSelect } from "../../features/user/user";
 
 const carReservationFormUserPage = () => {
-  const [users, set_users] = useState([]);
+  const [users, set_users] = useState<any>(null);
   const [user_uuid, set_user_uuid] = useState("");
   const [start_location, set_start_location] = useState("");
   const [finish_location, set_finish_location] = useState("");
@@ -21,7 +21,7 @@ const carReservationFormUserPage = () => {
   const [end_date, set_end_date] = useState("");
   const [loading, set_loading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const dispatch = useDispatch();
 
   const {
@@ -35,7 +35,7 @@ const carReservationFormUserPage = () => {
   useEffect(() => {
     if (message && isSuccess) {
       if (!isLoading) {
-        const uuid =  message.data.uuid;
+        const uuid = message.data.uuid;
         dispatch(resetCarReservation());
         navigate(`/carReservation/data/${uuid}`);
       }
@@ -43,10 +43,10 @@ const carReservationFormUserPage = () => {
   }, [message, isSuccess, isLoading]);
 
   const data_users = getDataUserSelect();
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     set_users(data_users?.dataResult);
-  },[data_users]);
+  }, [data_users]);
 
   //get data auth
   const authData = getMeAuth();
@@ -62,10 +62,10 @@ const carReservationFormUserPage = () => {
 
     if (linkBackParam !== null) {
       navigate(linkBackParam.toString());
-    }else{
-      navigate('/carReservation/data')
+    } else {
+      navigate("/carReservation/data");
     }
-  };
+  }
 
   function handleSubmit(e: any) {
     e.preventDefault();
@@ -77,7 +77,7 @@ const carReservationFormUserPage = () => {
         description,
         start_date,
         end_date,
-      })
+      }),
     );
   }
 

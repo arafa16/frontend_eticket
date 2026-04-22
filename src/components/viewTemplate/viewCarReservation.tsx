@@ -52,13 +52,13 @@ const viewCarReservation = (props: any) => {
         <div>
           <div className="font-medium whitespace-nowrap">Driver</div>
           <div className="mt-1 text-slate-500 text-justify">
-            {datas && datas.driver ? datas.driver.name : "Waiting for setup"}
+            {datas && datas.driver ? datas.driver.name : "-"}
           </div>
         </div>
         <div>
           <div className="font-medium whitespace-nowrap">Mobil</div>
           <div className="mt-1 text-slate-500 text-justify">
-            {datas && datas.car ? datas.car.name : "Waiting for setup"}
+            {datas && datas.car ? datas.car.name : "-"}
           </div>
         </div>
       </div>

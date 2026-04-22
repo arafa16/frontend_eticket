@@ -50,12 +50,11 @@ const CarReservationForm = (props: any) => {
                 className="w-full"
                 disabled={is_disabled}
               >
-                {users &&
-                  users.map((data: any, index: any) => (
-                    <option key={index} value={data.uuid}>
-                      {data.name}
-                    </option>
-                  ))}
+                {users?.map((data: any, index: any) => (
+                  <option key={index} value={data.uuid}>
+                    {data.name}
+                  </option>
+                ))}
               </TomSelect>
             </div>
           </div>
@@ -153,7 +152,7 @@ const CarReservationForm = (props: any) => {
               </TomSelect>
             </div>
           </div>
-          <div>
+          <div className={`${is_hide ? "hidden" : ""}`}>
             <div className="font-medium whitespace-nowrap">Mobil</div>
             <div className="mt-1 text-sm text-slate-500 pr-6">
               <FormSelect

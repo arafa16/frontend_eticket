@@ -22,7 +22,7 @@ export const getSelectCar: any = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(
-        import.meta.env.VITE_REACT_APP_API_URL + "/car/data?is_select=1",
+        import.meta.env.VITE_REACT_APP_API_URL + "/car/data?is_select=true",
         {
           withCredentials: true, // Now this is was the missing piece in the client side
         }
