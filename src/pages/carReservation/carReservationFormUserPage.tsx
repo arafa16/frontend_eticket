@@ -59,7 +59,7 @@ const carReservationFormUserPage = () => {
   const authData = getMeAuth();
 
   useEffect(() => {
-    set_user_uuid(authData.data?.uuid);
+    set_user_uuid(authData?.data?.uuid);
   }, [authData]);
 
   const navigate = useNavigate();

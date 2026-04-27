@@ -121,7 +121,7 @@ const CarReservationForm = (props: any) => {
             </div>
           </div>
           <div>
-            <div className="font-medium whitespace-nowrap">Tanggal Mulai</div>
+            <div className="font-medium whitespace-nowrap">Tanggal Selesai</div>
             <div className="mt-1 text-sm text-slate-500 pr-6">
               <FormInput
                 formInputSize="sm"
