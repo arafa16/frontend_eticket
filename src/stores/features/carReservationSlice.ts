@@ -3,6 +3,7 @@ import axios from "axios";
 
 interface variabel {
   data: any;
+  dataAttributes: any;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
@@ -11,6 +12,7 @@ interface variabel {
 
 const initialState: variabel = {
   data: null,
+  dataAttributes: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -80,11 +82,32 @@ export const createCarReservation: any = createAsyncThunk(
   },
 );
 
+export const getAttibuteCarReservation: any = createAsyncThunk(
+  "note/getAttibuteCarReservation",
+  async (datas: any, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        import.meta.env.VITE_REACT_APP_API_URL +
+          `/car_reservation/data/${datas.uuid}/attribute`,
+        datas,
+        {
+          withCredentials: true, // Now this is was the missing piece in the client side
+        },
+      );
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response);
+      }
+    }
+  },
+);
+
 export const updateCarReservation: any = createAsyncThunk(
   "note/updateCarReservation",
   async (datas: any, thunkAPI) => {
     try {
-      console.log(datas.value, "data feature");
       const response = await axios.patch(
         import.meta.env.VITE_REACT_APP_API_URL +
           `/car_reservation/data/${datas.uuid}`,
@@ -169,6 +192,20 @@ export const carReservationSlice = createSlice({
       state.message = action.payload;
     });
     builder.addCase(createCarReservation.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = action.payload;
+    });
+
+    builder.addCase(getAttibuteCarReservation.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAttibuteCarReservation.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.dataAttributes = action.payload;
+    });
+    builder.addCase(getAttibuteCarReservation.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;

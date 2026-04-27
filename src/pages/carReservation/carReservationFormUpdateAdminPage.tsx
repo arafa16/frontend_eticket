@@ -5,6 +5,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateCarReservation,
+  getAttibuteCarReservation,
   getCarReservationById,
   resetCarReservation,
 } from "../../stores/features/carReservationSlice";
@@ -15,6 +16,8 @@ import { getSelectCar, resetCar } from "../../stores/features/carSlice";
 
 const carReservationFormUpdateUserPage = () => {
   const { id } = useParams();
+
+  const [attributes, setAttributes] = useState<any>(null);
 
   const [users, set_users] = useState<any>([]);
   const [drivers, set_drivers] = useState<any>([]);
@@ -28,6 +31,7 @@ const carReservationFormUpdateUserPage = () => {
   const [start_date, set_start_date] = useState("");
   const [end_date, set_end_date] = useState("");
   const [loading, set_loading] = useState(false);
+  const [vehicle_allocation_uuid, set_vehicle_allocation_uuid] = useState();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -37,6 +41,7 @@ const carReservationFormUpdateUserPage = () => {
 
   const {
     data: dataResult,
+    dataAttributes,
     isError,
     isSuccess,
     isLoading,
@@ -46,68 +51,58 @@ const carReservationFormUpdateUserPage = () => {
   useEffect(() => {
     if (message && isSuccess) {
       if (!isLoading) {
-        const uuid = message.data.uuid;
+        const uuid = message?.data?.uuid;
         dispatch(resetCarReservation());
         navigate(
-          `/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`
+          `/carReservation/data/${uuid}?link_back=${linkBackParam?.toString()}`,
         );
       }
     }
   }, [message, isSuccess, isLoading, linkBackParam]);
 
   useEffect(() => {
-    if (dataResult && isSuccess) {
+    if (isSuccess && dataAttributes) {
       if (!isLoading) {
-        console.log(dataResult.data);
-        set_user_uuid(dataResult?.data.user.uuid);
-        set_start_location(dataResult?.data.start_location);
-        set_finish_location(dataResult?.data.finish_location);
-        set_description(dataResult?.data.description);
+        setAttributes(dataAttributes?.data);
+        set_user_uuid(dataAttributes?.data?.carReservation?.user?.uuid);
+        set_start_location(
+          dataAttributes?.data?.carReservation?.start_location,
+        );
+        set_finish_location(
+          dataAttributes?.data?.carReservation?.finish_location,
+        );
+        set_description(dataAttributes?.data?.carReservation?.description);
         set_start_date(
-          dayjs(dataResult?.data.start_date).format("YYYY-MM-DD HH:mm:ss")
+          dayjs(dataAttributes?.data?.carReservation?.start_date).format(
+            "YYYY-MM-DD HH:mm:ss",
+          ),
         );
         set_end_date(
-          dayjs(dataResult?.data.end_date).format("YYYY-MM-DD HH:mm:ss")
+          dayjs(dataAttributes?.data?.carReservation?.end_date).format(
+            "YYYY-MM-DD HH:mm:ss",
+          ),
         );
-        set_driver_uuid(dataResult?.data.driver?.uuid);
-        set_car_uuid(dataResult?.data.car?.uuid);
+        set_driver_uuid(dataAttributes?.data?.carReservation?.driver?.uuid);
+        set_car_uuid(dataAttributes?.data?.carReservation?.car?.uuid);
+        set_vehicle_allocation_uuid(
+          dataAttributes?.data?.carReservation?.vehicle_allocation?.uuid,
+        );
         dispatch(resetCarReservation());
       }
     }
-  }, [dataResult, isSuccess, isLoading]);
+  }, [dataAttributes, isSuccess, isLoading, message]);
+
+  console.log(car_uuid, "attributes");
 
   useEffect(() => {
-    dispatch(getCarReservationById({ uuid: id }));
+    dispatch(
+      getAttibuteCarReservation({
+        uuid: id,
+      }),
+    );
   }, []);
-
-  const data_users = getDataUserSelect();
-
-  useEffect(() => {
-    set_users(data_users?.dataResult);
-  }, [data_users]);
 
   const navigate = useNavigate();
-
-  const {
-    data: dataCar,
-    isError: isErrorCar,
-    isSuccess: isSuccessCar,
-    isLoading: isLoadingCar,
-    message: messageCar,
-  } = useSelector((state: any) => state.car);
-
-  useEffect(() => {
-    if (dataCar && isSuccessCar) {
-      if (!isLoadingCar) {
-        set_cars(dataCar?.data?.rows);
-        dispatch(resetCar());
-      }
-    }
-  }, [dataCar, isSuccessCar, isLoadingCar]);
-
-  useEffect(() => {
-    dispatch(getSelectCar());
-  }, []);
 
   function handleCancel() {
     const linkBackParam = searchParams.get("link_back_update");
@@ -133,22 +128,11 @@ const carReservationFormUpdateUserPage = () => {
           end_date,
           car_uuid,
           driver_uuid,
+          vehicle_allocation_uuid,
         },
-      })
+      }),
     );
   }
-
-  function filterUserDriver() {
-    if (users !== null) {
-      const findDriver = users.filter((user: any) => user.is_driver === true);
-
-      set_drivers(findDriver);
-    }
-  }
-
-  useEffect(() => {
-    filterUserDriver();
-  }, [users]);
 
   return (
     <div>
@@ -179,9 +163,12 @@ const carReservationFormUpdateUserPage = () => {
           set_end_date={set_end_date}
           cancel={handleCancel}
           submit={handleSubmit}
-          users={users}
-          drivers={drivers}
-          cars={cars}
+          users={attributes?.users}
+          drivers={attributes?.drivers}
+          cars={attributes?.cars}
+          vehicle_allocations={attributes?.vehicle_allocations}
+          vehicle_allocation_uuid={vehicle_allocation_uuid}
+          set_vehicle_allocation_uuid={set_vehicle_allocation_uuid}
           car_uuid={car_uuid}
           set_car_uuid={set_car_uuid}
           driver_uuid={driver_uuid}

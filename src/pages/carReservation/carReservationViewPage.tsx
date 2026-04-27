@@ -32,6 +32,8 @@ const carReservationViewPage = () => {
 
   const user = getMeAuth();
 
+  console.log(user?.data?.privilege?.car_reservation_admin, "user");
+
   const {
     data: dataResult,
     isError,
@@ -113,9 +115,15 @@ const carReservationViewPage = () => {
     const linkBackParam = searchParams.get("link_back");
 
     if (linkBackParam !== null) {
-      navigate(
-        `/carReservation/update/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`,
-      );
+      if (user?.data?.privilege?.car_reservation_admin === true) {
+        navigate(
+          `/carReservation/update_admin/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`,
+        );
+      } else {
+        navigate(
+          `/carReservation/update/${id}?link_back=${linkBackParam.toString()}&link_back_update=/carReservation/data/${id}?link_back=${linkBackParam.toString()}`,
+        );
+      }
     } else {
       navigate(
         `/carReservation/update/${id}?link_back=/carReservation/data/${id}`,
@@ -137,12 +145,12 @@ const carReservationViewPage = () => {
   return (
     <div>
       {modalAttachment}
-      <div className="mt-6 flex justify-between">
-        <div className="flex justify-start gap-x-2">
+      <div className="mt-6 md:flex md:justify-between">
+        <div className="md:flex md:justify-start md:gap-x-2">
           <Button
             variant="secondary"
             size="sm"
-            className="px-4"
+            className="px-4 w-full mb-4 md:mb-0"
             onClick={() => handleBack()}
           >
             Back
@@ -150,7 +158,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full mb-4 md:mb-0 ${
               user?.data?.privilege?.car_reservation_user === true
                 ? ""
                 : "hidden"
@@ -160,11 +168,11 @@ const carReservationViewPage = () => {
             Edit
           </Button>
         </div>
-        <div className="flex justify-end gap-x-4">
+        <div className="md:flex md:justify-end gap-x-2">
           <Button
             variant="secondary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto mb-4 md:mb-0 ${
               data?.car_reservation_status?.sequence !== 7 &&
               user?.data?.privilege?.car_reservation_user === true
                 ? ""
@@ -177,7 +185,7 @@ const carReservationViewPage = () => {
           <Button
             variant="secondary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 7 &&
               user?.data?.privilege?.car_reservation_user === true
                 ? ""
@@ -190,7 +198,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 1 &&
               user?.data?.privilege?.car_reservation_user === true
                 ? ""
@@ -203,7 +211,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 2 &&
               user?.data?.privilege?.car_reservation_admin === true
                 ? ""
@@ -216,7 +224,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 3 &&
               user?.data?.privilege?.car_reservation_admin === true
                 ? ""
@@ -229,7 +237,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 4 &&
               user?.data?.privilege?.car_reservation_driver === true
                 ? ""
@@ -242,7 +250,7 @@ const carReservationViewPage = () => {
           <Button
             variant="primary"
             size="sm"
-            className={`px-4 ${
+            className={`px-4 w-full md:w-auto ${
               data?.car_reservation_status?.sequence === 5 &&
               user?.data?.privilege?.car_reservation_driver === true
                 ? ""
