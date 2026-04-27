@@ -1,5 +1,20 @@
-## [Unreleased](https://github.com/arafa16/frontend_eticket/compare/2.0.0...main)
+## [Unreleased](https://github.com/arafa16/frontend_eticket/compare/2.1.0...main)
 
+## [2.1.0](https://github.com/arafa16/frontend_eticket/releases/tag/2.1.0) - 2026-04-23
+
+- fixs: vehicle_allocation not found by [@arafa16](https://github.com/arafa16) in [#e4d08b8](https://github.com/arafa16/frontend_eticket/commit/e4d08b8e10b8fc42ef52c8f6bb32b462859e3482).
+
+- build: make attachment in the car reservation page by [@arafa16](https://github.com/arafa16) in [#77b5bc1](https://github.com/arafa16/frontend_eticket/commit/77b5bc19211c854008fcc68ff3ed51b8e4cc24f9).
+
+- build: make new field and fixs all problem in car reservation by [@arafa16](https://github.com/arafa16) in [#68d1fd6](https://github.com/arafa16/frontend_eticket/commit/68d1fd6f0b521c2575f3324f7c5fcfe6d8315ebe).
+
+- build: make car CRU entity by [@arafa16](https://github.com/arafa16) in [#1cd7580](https://github.com/arafa16/frontend_eticket/commit/1cd7580ddc7d2a67546ad0e2ec7799ee3b7cc4f2).
+
+- fixs: trouble in form car reservation by [@arafa16](https://github.com/arafa16) in [#b817c8c](https://github.com/arafa16/frontend_eticket/commit/b817c8c40ab0d2641f1ceec55864bb4bee3a9b24).
+
+- fixs: change car reservation by [@arafa16](https://github.com/arafa16) in [#17f4a3d](https://github.com/arafa16/frontend_eticket/commit/17f4a3d811b288a482cd467b032882947e644dee).
+
+- fixs: trouble for set privilege by [@arafa16](https://github.com/arafa16) in [#fbf28d1](https://github.com/arafa16/frontend_eticket/commit/fbf28d1e5c39ac0b842f692cafa6e7fecb9ab314).
 
 ## [2.0.0](https://github.com/arafa16/frontend_eticket/releases/tag/2.0.0) - 2025-07-28
 
