@@ -23,11 +23,15 @@ const uploadAttachment = (props: any) => {
         <Menu.Button
           className={`text-slate-600 text-xs box px-4 py-1 text-center flex gap-x-4`}
         >
-          <p>{datas?.length > 0 && datas?.length} Attachment</p>
+          <p>
+            {datas?.attachment_tickets?.length > 0 &&
+              datas?.attachment_tickets?.length}{" "}
+            Attachment
+          </p>
           <Lucide icon="MoreHorizontal" className="w-4 h-4" />
         </Menu.Button>
         <Menu.Items className="min-w-72">
-          {datas?.map((data: any, index: any) => (
+          {datas?.attachment_tickets?.map((data: any, index: any) => (
             <Menu.Item
               key={index}
               className={`text-slate-600 py-1 flex gap-x-2 justify-between`}
